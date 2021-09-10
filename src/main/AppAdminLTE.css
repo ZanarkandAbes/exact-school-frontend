@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.page-container, html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page-content-container {
+  display: flex;
+  align-items: stretch;
+  height: calc(100% - 80px);
+}
+
+.header-container {
+  height: 80px;
+  background-color: brown;
+}
+
+.sidebar-container {
+  height: 100%;
+  background-color: yellow;
+  width: 320px;
+}
+
+.page-content {
+  height: 100%;
+  overflow: auto;
+  background-color: red;
+  width: calc(100% - 320px);
+}

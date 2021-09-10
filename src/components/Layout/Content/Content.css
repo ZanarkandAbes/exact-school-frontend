@@ -1,0 +1,6 @@
+.content {
+  display: flex;
+  flex: 1;
+  background-color: lightblue;
+  padding: 30px;
+}
