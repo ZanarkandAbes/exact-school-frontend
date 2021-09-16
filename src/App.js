@@ -1,11 +1,11 @@
 import './App.css'
-import AppAdminLTE from './main/AppAdminLTE'
+import Routes from './components/Routes/Routes'
 
 function App() {
 
   return (
     <div className="App">
-      <AppAdminLTE />
+      <Routes />
     </div>
   )
 }

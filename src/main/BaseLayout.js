@@ -1,4 +1,4 @@
-import './AppAdminLTE.css'
+import './BaseLayout.css'
 import React from 'react'
 
 import Header from '../components/Layout/Header/Header'
@@ -7,10 +7,10 @@ import Content from '../components/Layout/Content/Content'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
-const AppAdminLTE = props => {
+const BaseLayout = props => {
 
   return (
-    <div className="app-admin-lte">
+    <div className="home-page-container">
       <Router>
         <div className="page-container">
           <div className="header-container">
@@ -30,4 +30,4 @@ const AppAdminLTE = props => {
   )
 }
 
-export default AppAdminLTE
+export default BaseLayout
