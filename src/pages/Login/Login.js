@@ -10,9 +10,7 @@ import loginService from '../../services/login'
 const Login = () => {
 
   const handleSubmit = values => {
-    
-    const token = loginService(values)
-
+    loginService(values)
   }
 
   const validators = yup.object().shape({
@@ -23,14 +21,14 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h1 className="login-title">Login</h1>
-      <p className="login-description">Preencha os campos para continuar</p>
       <Formik
         initialValues={{}}
         onSubmit={handleSubmit}
         validationSchema={validators}
       >
         <Form className="login-form">
+          <h1 className="login-title">Exact School</h1>
+          <h1 className="login-title">Login</h1>
           <div className="login-form-group">
             <Field
               name="email"

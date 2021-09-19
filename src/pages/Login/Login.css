@@ -1,10 +1,15 @@
 .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   color: black;
   background-color: #59a9c1;
+  height: 100%;
 }
 
 .login-form-field {
+  display: flex;
   border: none;
   background: #000000;
   color: #fdfdfd;
@@ -12,8 +17,8 @@
   margin-bottom: 1rem;
   padding: 1rem;
   font-size: 1.2rem;
-  border-radius: 7px;
   width: 100%;
+  border-radius: 7px;
   transition: all .1s linear;
 }
 
@@ -36,10 +41,11 @@
 }
 
 .login-form-button-submit:hover {
+  display: flex;
   cursor: pointer;
 }
 
-.login-title, .login-description {
+.login-title {
   display: flex;
   justify-content: center;
   align-items: center;
