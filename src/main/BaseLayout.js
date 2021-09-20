@@ -4,6 +4,7 @@ import React from 'react'
 import Header from '../components/Layout/Header/Header'
 import Menu from '../components/Layout/Menu/Menu'
 import Content from '../components/Layout/Content/Content'
+import Footer from '../components/Layout/Footer/Footer'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
@@ -23,6 +24,9 @@ const BaseLayout = props => {
             <div className="page-content">
               <Content />
             </div>
+          </div>
+          <div className="footer-container">
+            <Footer />
           </div>
         </div>
       </Router>

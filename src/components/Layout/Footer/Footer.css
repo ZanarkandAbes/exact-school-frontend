@@ -1,0 +1,14 @@
+.nav-footer-container {
+  height: 50px;
+  background-color: #0077B6;
+}
+
+.div-footer-container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
