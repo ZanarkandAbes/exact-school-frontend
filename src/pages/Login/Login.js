@@ -4,8 +4,7 @@ import React from 'react'
 import { ErrorMessage, Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 
-
-import loginService from '../../services/login'
+import loginService from '../../services/users/login'
 
 const Login = () => {
 
@@ -43,6 +42,7 @@ const Login = () => {
           <div className="login-form-group">
             <Field
               name="password"
+              type="password"
               className="login-form-field"
             />
             <ErrorMessage

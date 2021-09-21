@@ -4,8 +4,7 @@ const Home = props => {
 
   return (
     <div className="home">
-      <h1>Início</h1>
-      <h2>Bem vindo!</h2>
+      <h1>Bem vindo ao Exact School!</h1>
     </div>
   )
 }
