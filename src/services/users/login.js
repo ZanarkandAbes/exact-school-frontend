@@ -11,6 +11,10 @@ const loginService = (values) => {
         history.push('/')
       }
     })
+    .catch(err => {
+      console.log('Error:')
+      console.log(err)
+    })
 }
 
 export default loginService
