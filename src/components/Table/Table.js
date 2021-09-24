@@ -1,13 +1,15 @@
 import './Table.css'
 import React from 'react'
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, useGlobalFilter } from 'react-table'
+
+import Filter from './filters/Filter'
 
 const Table = props => {
 
   const tableInstance = useTable({
     columns: props.columns,
     data: props.data
-  }, useSortBy)
+  }, useGlobalFilter, useSortBy)
 
   const {
     getTableProps,
@@ -15,10 +17,16 @@ const Table = props => {
     headerGroups,
     footerGroups,
     rows,
-    prepareRow
+    prepareRow,
+    state,
+    setGlobalFilter
   } = tableInstance
 
+  const { globalFilter } = state
+
   return (
+    <>
+    <Filter filter={globalFilter} setFilter={setGlobalFilter} />
     <table {...getTableProps()} className="list-table">
       <thead>
         {headerGroups.map(headerGroup => (
@@ -47,20 +55,8 @@ const Table = props => {
             )
           })}
       </tbody>
-      <tfoot>
-        {
-          footerGroups.map(footerGroup => (
-            <tr {...footerGroup.getFooterGroupProps()}>
-              {
-                footerGroup.headers.map(column => (
-                  <td {...column.getFooterProps}>{column.render('Footer')}</td>
-                ))
-              }
-            </tr>
-          ))
-        }
-      </tfoot>
     </table>
+    </>
   )
 }
 
