@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const getUsersService = async (token, filters, setData) => {
+const getUsersService = async (token, filters, setUserData) => {
 
   await axios.get(`http://localhost:3003/exact-school/users?name=${filters.name}&email=${filters.email}`, { params: { token: token } } )
     .then(response => {
       const { data } = response
       
-      setData(data)
+      setUserData(data)
 
       return data
     })

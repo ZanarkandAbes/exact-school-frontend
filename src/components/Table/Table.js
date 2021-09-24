@@ -1,42 +1,35 @@
 import './Table.css'
-import React, { useState, useEffect, useMemo } from 'react'
-import { useTable } from 'react-table'
+import React from 'react'
+import { useTable, useSortBy } from 'react-table'
 
-import getUsersService from '../../services/users/get-users'
-
-import { COLUMNS } from './users/columns'
-
-const Table = () => {
-
-  const token = localStorage.getItem('app-token')
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    getUsersService(token, { name: '', email: '' }, setData)
-  }, [])
-
-  const columns = useMemo(() => COLUMNS, [])
+const Table = props => {
 
   const tableInstance = useTable({
-    columns: columns,
-    data: data
-  })
+    columns: props.columns,
+    data: props.data
+  }, useSortBy)
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    footerGroups,
     rows,
     prepareRow
   } = tableInstance
 
   return (
-    <table {...getTableProps()} className="user-list-table">
+    <table {...getTableProps()} className="list-table">
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                {column.render('Header')}
+                <span>
+                  {column.isSorted ? (column.isSortedDesc ? '⬇️' : '⬆️') : ''}
+                </span>
+              </th>
             ))}
           </tr>
         ))}
@@ -54,6 +47,19 @@ const Table = () => {
             )
           })}
       </tbody>
+      <tfoot>
+        {
+          footerGroups.map(footerGroup => (
+            <tr {...footerGroup.getFooterGroupProps()}>
+              {
+                footerGroup.headers.map(column => (
+                  <td {...column.getFooterProps}>{column.render('Footer')}</td>
+                ))
+              }
+            </tr>
+          ))
+        }
+      </tfoot>
     </table>
   )
 }
