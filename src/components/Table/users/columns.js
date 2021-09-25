@@ -1,28 +1,34 @@
 import { format } from 'date-fns'
+import ColumnFilter from '../filters/ColumnFilter'
 
 export const COLUMNS = [
   {
     Header: 'E-mail',
-    accessor: 'email'
+    accessor: 'email',
+    Filter: ColumnFilter
   },
   {
     Header: 'Nome',
-    accessor: 'name'
+    accessor: 'name',
+    Filter: ColumnFilter
   },
   {
     Header: 'Tipo de Usuário',
-    accessor: 'userType'
+    accessor: 'userType',
+    Filter: ColumnFilter
   },
   {
     Header: 'Total de Moedas',
-    accessor: 'totalCoins'
+    accessor: 'totalCoins',
+    Filter: ColumnFilter
   },
   {
     Header: 'Data de Nascimento',
     accessor: 'birthDay',
     Cell: ({ value }) => {
       return format(new Date(value), 'dd/MM/yyyy')
-    }
+    },
+    Filter: ColumnFilter
   },
   {
     Header: 'Editar',

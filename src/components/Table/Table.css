@@ -20,3 +20,12 @@
   background-color: #90E0EF;
   color: white;
 }
+
+.pagination-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+  background-color: #f2f2f2;
+  padding: 4px;
+  border: 1px solid #ddd;
+}

@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 const Param = props => {
   const { id } = useParams()
 
+  console.log('props', props.match.params.id)
+
   return (
     <div className="param">
       <h1>Param</h1>
