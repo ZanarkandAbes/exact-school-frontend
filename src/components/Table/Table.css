@@ -29,3 +29,7 @@
   padding: 4px;
   border: 1px solid #ddd;
 }
+
+.goto-page-input {
+  width: 40px;
+}

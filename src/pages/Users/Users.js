@@ -6,6 +6,10 @@ import { COLUMNS } from '../../components/Table/users/columns'
 
 import Table from '../../components/Table/Table'
 
+import Register from './Register'
+
+import { history } from '../../history'
+
 const Users = props => {
 
   const token = localStorage.getItem('app-token')
@@ -21,6 +25,10 @@ const Users = props => {
     <div className="users">
       <h1>Listagem de usuários</h1>
       <h2>Bem vindo!</h2>
+      {/* <button onClick={() => { 
+        history.push('/cadastrar-usuario')
+       }}>Cadastrar</button> */}
+       {/* Teriam que ter rotas de usuário aqui dentro de maneira separada eu acho (as rotas de usuário seriam criadas aqui) */}
       <Table data={userData} columns={columns} />
     </div>
   )

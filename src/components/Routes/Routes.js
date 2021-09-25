@@ -1,7 +1,7 @@
 import { Route, Switch, Router } from 'react-router-dom'
 
 import Login from '../../pages/Login'
-import Register from '../../pages/Register'
+import Register from '../../pages/Users/Register'
 import NotFound from '../../pages/NotFound/NotFound'
 
 import PrivateRoute from '../PrivateRoute/PrivateRoute'

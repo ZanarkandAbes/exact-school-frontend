@@ -22,11 +22,14 @@ const Table = props => {
     canPreviousPage,
     prepareRow,
     pageOptions,
+    gotoPage,
+    pageCount,
+    setPageSize,
     state,
     setGlobalFilter
   } = tableInstance
 
-  const { globalFilter, pageIndex } = state
+  const { globalFilter, pageIndex, pageSize } = state
 
   return (
     <>
@@ -62,14 +65,37 @@ const Table = props => {
         </tbody>
       </table>
       <div className="pagination-buttons-container">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>{'<<'}</button>
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>Anterior</button>
+        <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+          {
+            [5, 10, 25, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Mostrar {pageSize}
+              </option>
+            ))
+          }
+        </select>
         <span>
           Página{' '}
           <strong>
             {pageIndex + 1} de {pageOptions.length}
           </strong>
         </span>
+        <span>
+          Vá para a página: {' '}
+          <input
+            className="goto-page-input"
+            type='number'
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(pageNumber)
+            }}
+          />
+        </span>
         <button onClick={() => nextPage()} disabled={!canNextPage}>Próxima</button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
       </div>
     </>
   )
