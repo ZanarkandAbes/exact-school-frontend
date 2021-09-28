@@ -33,6 +33,7 @@ export const COLUMNS = [
   {
     Header: 'Editar',
     Cell: ({ cell }) => (
+      // criar rota path param com o id que tem no valor da linha 
       <button value="teste" onClick={e => console.log('KKKKKKKK')}>
         Editar
       </button>

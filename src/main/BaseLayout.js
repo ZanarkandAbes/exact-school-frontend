@@ -22,7 +22,9 @@ const BaseLayout = props => {
               <Menu />
             </div>
             <div className="page-content">
-              <Content />
+              <Content>
+                {props.children}
+              </Content>
             </div>
           </div>
           <div className="footer-container">

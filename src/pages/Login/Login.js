@@ -5,11 +5,20 @@ import { ErrorMessage, Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 
 import loginService from '../../services/users/login'
+import { useAuth } from '../../providers/auth'
+import { history } from '../../history'
 
 const Login = () => {
 
+  const authProvider = useAuth()
+
   const handleSubmit = values => {
-    loginService(values)
+    loginService(values).then(data => {
+      if (data) {
+        history.push('/')
+        authProvider.setToken(data.token)
+      }
+    })
   }
 
   const validators = yup.object().shape({
