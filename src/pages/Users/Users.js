@@ -6,10 +6,6 @@ import { COLUMNS } from '../../components/Table/users/columns'
 
 import Table from '../../components/Table/Table'
 
-import Register from './Register'
-
-import { history } from '../../history'
-
 const Users = props => {
 
   const token = localStorage.getItem('app-token')
@@ -22,7 +18,7 @@ const Users = props => {
   const columns = useMemo(() => COLUMNS, [])
 
   return (
-    <div className="users">
+    <div className="users-container">
       <h1>Listagem de usuários</h1>
       <h2>Bem vindo!</h2>
       {/* <button onClick={() => { 

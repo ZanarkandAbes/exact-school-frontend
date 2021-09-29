@@ -3,28 +3,18 @@ import ColumnFilter from '../filters/ColumnFilter'
 
 export const COLUMNS = [
   {
-    Header: 'E-mail',
-    accessor: 'email',
+    Header: 'Título',
+    accessor: 'title',
     Filter: ColumnFilter
   },
   {
-    Header: 'Nome',
-    accessor: 'name',
+    Header: 'Tipo da Aula',
+    accessor: 'classType',
     Filter: ColumnFilter
   },
   {
-    Header: 'Tipo de Usuário',
-    accessor: 'userType',
-    Filter: ColumnFilter
-  },
-  {
-    Header: 'Total de Moedas',
-    accessor: 'totalCoins',
-    Filter: ColumnFilter
-  },
-  {
-    Header: 'Data de Nascimento',
-    accessor: 'birthDay',
+    Header: 'Data de Criação',
+    accessor: 'createdAt',
     Cell: ({ value }) => {
       return format(new Date(value), 'dd/MM/yyyy')
     },
@@ -33,7 +23,6 @@ export const COLUMNS = [
   {
     Header: 'Visualizar',
     Cell: ({ cell }) => (
-      // criar rota path param com o id que tem no valor da linha 
       <button value="teste" onClick={e => console.log('OIE')}>
         Visualizar
       </button>
@@ -42,7 +31,6 @@ export const COLUMNS = [
   {
     Header: 'Editar',
     Cell: ({ cell }) => (
-      // criar rota path param com o id que tem no valor da linha 
       <button value="teste" onClick={e => console.log('KKKKKKKK')}>
         Editar
       </button>

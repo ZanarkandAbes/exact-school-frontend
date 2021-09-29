@@ -4,14 +4,16 @@ import Login from '../../pages/Login'
 import Register from '../../pages/Users/Register'
 import NotFound from '../../pages/NotFound/NotFound'
 
-import PrivateRoute from '../PrivateRoute/PrivateRoute'
-
 import BaseLayout from '../../main/BaseLayout'
 
 import Home from '../../pages/Home/Home'
 import About from '../../pages/About/About'
 import Param from '../../pages/Param/Param'
 import Users from '../../pages/Users/Users'
+import Quizzes from '../../pages/Quizzes/Quizzes'
+import Topics from '../../pages/Topics/Topics'
+import Classes from '../../pages/Classes/Classes'
+import Badges from '../../pages/Badges/Badges'
 
 import { history } from '../../history'
 import { useAuth } from '../../providers/auth'
@@ -23,8 +25,12 @@ const LoggedRoutes = () => (
       <Route component={About} exact path="/about" />
       <Route component={Param} exact path="/param/:id" />
       <Route component={Users} exact path="/usuarios" />
+      <Route component={Quizzes} exact path="/questionarios" />
+      <Route component={Topics} exact path="/topicos" />
+      <Route component={Classes} exact path="/aulas" />
+      <Route component={Badges} exact path="/medalhas" />
       <Route component={Home} exact path="/" />
-      {/* <Route component={NotFound} path="*" /> */}
+      <Route component={NotFound} path="*" />
     </Switch>
   </BaseLayout>
 )
@@ -32,7 +38,6 @@ const LoggedRoutes = () => (
 const LoginRoutes = () => (
   <Switch>
     <Route component={Login} exact path="/login" />
-    {/* <Route component={NotFound} path="*" /> */}
     <Redirect to="/login" from="*" />
   </Switch>
 )
@@ -44,8 +49,6 @@ const Router = () => {
   if (!authProvider.tokenLoaded) return (<></>)
 
   const isLogged = !!authProvider.token
-
-  console.log(authProvider.token)
 
   const Routes = isLogged ? LoggedRoutes : LoginRoutes
 

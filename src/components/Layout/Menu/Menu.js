@@ -16,16 +16,19 @@ const Menu = props => {
             <Link to="/usuarios">Usuários</Link>
           </li>
           <li>
-            <Link to="/param/123">Param #01</Link>
+            <Link to="/questionarios">Questionários</Link>
           </li>
           <li>
-            <Link to="/param/cool">Param #02</Link>
+            <Link to="/topicos">Tópicos</Link>
+          </li>
+          <li>
+            <Link to="/aulas">Aulas</Link>
+          </li>
+          <li>
+            <Link to="/medalhas">Medalhas</Link>
           </li>
           <li>
             <Link to="/about">Sobre</Link>
-          </li>
-          <li>
-            <Link to="/dont-exist">Não Existe</Link>
           </li>
         </ul>
       </nav>
