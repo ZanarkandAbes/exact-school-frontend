@@ -14,13 +14,13 @@ import userTypesEnum from '../../../common/enums/userType'
 const UserRegisterForm = props => {
 
   const token = localStorage.getItem('app-token')
-  const [badgesValue, setBadges] = useState([])
+  const [badgesValues, setBadgesValues] = useState([])
 
   useEffect(() => {
-    getBadgesService(token, { badgeType: '', name: '' }, setBadges)
+    getBadgesService(token, { badgeType: '', name: '' }, setBadgesValues)
   }, [])
 
-  const badgesSelectOptions = badgesValue.map(badge => ({ value: badge, label: badge.name }))
+  const badgesSelectOptions = badgesValues.map(badge => ({ value: badge, label: badge.name }))
 
   const userTypeSelectOptions = [
     {
@@ -57,13 +57,17 @@ const UserRegisterForm = props => {
       password: '',
       name: '',
       birthDay: '',
+      userType: '',
       badges: [],
-      userType: ''
+      totalCoins: 0
     },
     validate,
     onSubmit: values => {
       console.log(values)
-      // por o serviço aqui
+
+      let badges = values.badges.map(badge => ({ ...badge.value }))
+      values.badges = badges
+      registerUserService(token, values)
     }
   })
 
@@ -137,8 +141,21 @@ const UserRegisterForm = props => {
             isMulti={true}
           />
         </div>
-        <button className="user-register-form-button-submit" type="submit">Cadastrar</button>
-        <button className="user-register-form-button-back" type="button">Voltar</button>
+        <div className="user-register-form-fields">
+          <input
+            name="totalCoins"
+            id="totalCoins"
+            type="number"
+            onChange={formik.handleChange}
+            className="user-register-form-input"
+            placeholder="Digite a quantidade de moedas"
+            value={formik.values.totalCoins}
+          />
+        </div>
+        <div className="user-register-form-buttons-container">
+          <button className="user-register-form-button-submit" type="submit">Cadastrar</button>
+          <button className="user-register-form-button-back" type="button">Voltar</button>
+        </div>
       </form>
     </div>
   )
