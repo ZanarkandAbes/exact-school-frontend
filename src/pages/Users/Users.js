@@ -1,3 +1,5 @@
+import './Users.css'
+
 import React, { useState, useEffect, useMemo } from 'react'
 
 import getUsersService from '../../services/users/get-users'
@@ -5,6 +7,9 @@ import getUsersService from '../../services/users/get-users'
 import { COLUMNS } from '../../components/Table/users/columns'
 
 import Table from '../../components/Table/Table'
+
+import { history } from '../../history'
+import UserRegisterForm from './Register'
 
 const Users = props => {
 
@@ -21,10 +26,13 @@ const Users = props => {
     <div className="users-container">
       <h1>Listagem de usuários</h1>
       <h2>Bem vindo!</h2>
-      {/* <button onClick={() => { 
-        history.push('/cadastrar-usuario')
-       }}>Cadastrar</button> */}
-       {/* Teriam que ter rotas de usuário aqui dentro de maneira separada eu acho (as rotas de usuário seriam criadas aqui) */}
+      <div className="users-content-container">
+        <button className="user-register-button" onClick={() => {
+          history.push('/usuarios/cadastrar')
+        }}>
+          Cadastrar Usuário
+        </button>
+      </div>
       <Table data={userData} columns={columns} />
     </div>
   )

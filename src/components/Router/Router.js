@@ -1,7 +1,7 @@
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 
 import Login from '../../pages/Login'
-import Register from '../../pages/Users/Register'
+import UserRegisterForm from '../../pages/Users/Register/UserRegisterForm'
 import NotFound from '../../pages/NotFound/NotFound'
 
 import BaseLayout from '../../main/BaseLayout'
@@ -21,10 +21,10 @@ import { useAuth } from '../../providers/auth'
 const LoggedRoutes = () => (
   <BaseLayout>
     <Switch>
-      <Route component={Register} exact path="/cadastrar-usuario" />
       <Route component={About} exact path="/about" />
       <Route component={Param} exact path="/param/:id" />
       <Route component={Users} exact path="/usuarios" />
+      <Route component={UserRegisterForm} exact path="/usuarios/cadastrar" />
       <Route component={Quizzes} exact path="/questionarios" />
       <Route component={Topics} exact path="/topicos" />
       <Route component={Classes} exact path="/aulas" />
