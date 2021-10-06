@@ -7,13 +7,17 @@ import CustomSelect from '../../../components/CustomSelect/CustomSelect'
 import registerUserService from '../../../services/users/register-user'
 import getBadgesService from '../../../services/badges/get-badges'
 
-import { history } from '../../../history'
-
 import userTypesEnum from '../../../common/enums/userType'
+
+import { useHistory } from 'react-router'
+import { useAuth } from '../../../providers/auth'
 
 const UserRegisterForm = props => {
 
-  const token = localStorage.getItem('app-token')
+  const historyContext = useHistory()
+
+  const { token } = useAuth()
+
   const [badgesValues, setBadgesValues] = useState([])
 
   useEffect(() => {
@@ -67,13 +71,15 @@ const UserRegisterForm = props => {
 
       let badges = values.badges.map(badge => ({ ...badge.value }))
       values.badges = badges
+      // setar o loading (controlar estado)
       registerUserService(token, values)
+      historyContext.push('/usuarios')
     }
   })
 
   return (
     <div className="user-register-form-container">
-      <form onSubmit={formik.handleSubmit}>
+      <form>
         <div className="user-register-form-fields">
           <input
             name="email"
@@ -152,11 +158,19 @@ const UserRegisterForm = props => {
             value={formik.values.totalCoins}
           />
         </div>
-        <div className="user-register-form-buttons-container">
-          <button className="user-register-form-button-submit" type="submit">Cadastrar</button>
-          <button className="user-register-form-button-back" type="button">Voltar</button>
-        </div>
       </form>
+      <div className="user-register-form-buttons-container">
+        <button className="user-register-form-button-submit" type="button" onClick={() => {
+          formik.handleSubmit()
+        }}>
+          Cadastrar
+        </button>
+        <button className="user-register-form-button-back" type="button" onClick={() => {
+          historyContext.push('/usuarios')
+        }}>
+          Voltar
+        </button>
+      </div>
     </div>
   )
 }

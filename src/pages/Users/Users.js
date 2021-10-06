@@ -8,12 +8,16 @@ import { COLUMNS } from '../../components/Table/users/columns'
 
 import Table from '../../components/Table/Table'
 
-import { history } from '../../history'
-import UserRegisterForm from './Register'
+import { useAuth } from '../../providers/auth'
+import { useHistory } from 'react-router'
 
 const Users = props => {
 
-  const token = localStorage.getItem('app-token')
+  const historyContext = useHistory()
+
+  // sempre que utilizar o token fazer dessa forma:
+  const { token } = useAuth()
+
   const [userData, setUserData] = useState([])
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const Users = props => {
       <h2>Bem vindo!</h2>
       <div className="users-content-container">
         <button className="user-register-button" onClick={() => {
-          history.push('/usuarios/cadastrar')
+          historyContext.push('/usuarios/cadastrar')
         }}>
           Cadastrar Usuário
         </button>
