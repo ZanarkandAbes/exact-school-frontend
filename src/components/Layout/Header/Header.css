@@ -20,5 +20,14 @@
 }
 
 .button-header {
-  background-color: green;
+  background: red;
+  color: #fdfdfd;
+  padding: .5rem 2rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.button-header:hover {
+  display: flex;
+  cursor: pointer;
 }

@@ -1,7 +1,19 @@
 .content-container {
+  position: relative;
   display: flex;
   flex: 1;
   background-color: #00B4D8;
+  overflow-y: auto;
   padding: 32px;
+  width: 100%;
+  height: 100%;
   justify-content: center;
+}
+
+.content-container:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 64px;
+  bottom: -64px;
 }

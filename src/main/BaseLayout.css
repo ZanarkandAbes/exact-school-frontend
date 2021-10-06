@@ -29,7 +29,7 @@
 
 .page-content {
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: red;
   width: calc(100% - 320px);
 }

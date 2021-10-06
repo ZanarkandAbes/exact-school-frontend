@@ -1,3 +1,8 @@
+.users-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .users-content-container {
   display: flex;
   justify-content: space-between;
