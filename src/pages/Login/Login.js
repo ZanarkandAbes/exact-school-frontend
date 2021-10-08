@@ -7,8 +7,13 @@ import * as yup from 'yup'
 import loginService from '../../services/users/login'
 import { useAuth } from '../../providers/auth'
 import { history } from '../../history'
+import { useToasts } from 'react-toast-notifications'
 
 const Login = () => {
+
+  const toastContext = useToasts()
+
+  // trocar authProvider por authContext
 
   const authProvider = useAuth()
 
@@ -17,6 +22,9 @@ const Login = () => {
       if (data) {
         history.push('/')
         authProvider.setToken(data.token)
+        toastContext.addToast('Foi! kkkkkk', { appearance: 'success', autoDismiss: true })
+      } else {
+        toastContext.addToast('Deu ruim ! kkkkk', { appearance: 'error', autoDismiss: true })
       }
     })
   }
