@@ -1,5 +1,5 @@
 import './BadgeRegisterForm.css'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useFormik } from 'formik'
 
 import CustomSelect from '../../../components/CustomSelect/CustomSelect'
@@ -35,7 +35,7 @@ const BadgeRegisterForm = props => {
     if (!values.name) errors.name = 'O campo de nome é obrigatório'
     if (values.name.length < 1 || values.name.length > 100) errors.name = 'É necessário um nome entre no mínimo 1 e no máximo 100 caracteres'
     if (!values.price) errors.price = 'O campo de preço é obrigatório'
-    if (!values.badgeType) errors.badgeType = 'O campo de tipo de usuário é obrigatório'
+    if (!values.badgeType) errors.badgeType = 'O campo de tipo de medalha é obrigatório'
 
     return errors
   }
@@ -83,9 +83,10 @@ const BadgeRegisterForm = props => {
             type="number"
             onChange={formik.handleChange}
             className="badge-register-form-input"
-            placeholder="Digite a quantidade de moedas"
+            placeholder="Digite a quantidade de moedas que a medalha custa"
             value={formik.values.price}
           />
+          {formik.errors.price ? <div className="quiz-register-form-errors">{formik.errors.price}</div> : null}
         </div>
         <div className="badge-register-form-fields">
           <CustomSelect

@@ -3,6 +3,7 @@ import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import Login from '../../pages/Login'
 import UserRegisterForm from '../../pages/Users/Register/UserRegisterForm'
 import BadgeRegisterForm from '../../pages/Badges/Register/BadgeRegisterForm'
+import QuizRegisterForm from '../../pages/Quizzes/Register/QuizRegisterForm'
 import NotFound from '../../pages/NotFound/NotFound'
 
 import BaseLayout from '../../main/BaseLayout'
@@ -27,6 +28,7 @@ const LoggedRoutes = () => (
       <Route component={Users} exact path="/usuarios" />
       <Route component={UserRegisterForm} exact path="/usuarios/cadastrar" />
       <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />
+      <Route component={QuizRegisterForm} exact path="/questionarios/cadastrar" />
       <Route component={Quizzes} exact path="/questionarios" />
       <Route component={Topics} exact path="/topicos" />
       <Route component={Classes} exact path="/aulas" />
