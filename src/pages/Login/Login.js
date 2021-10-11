@@ -9,22 +9,23 @@ import { useAuth } from '../../providers/auth'
 import { history } from '../../history'
 import { useToasts } from 'react-toast-notifications'
 
+import successMessagesEnum from '../../common/enums/successMessages'
+import errorMessagesEnum from '../../common/enums/errorMessages'
+
 const Login = () => {
 
   const toastContext = useToasts()
 
-  // trocar authProvider por authContext
-
-  const authProvider = useAuth()
+  const authContext = useAuth()
 
   const handleSubmit = values => {
     loginService(values).then(data => {
       if (data) {
         history.push('/')
-        authProvider.setToken(data.token)
-        toastContext.addToast('Foi! kkkkkk', { appearance: 'success', autoDismiss: true })
+        authContext.setToken(data.token)
+        toastContext.addToast(successMessagesEnum.LOGIN, { appearance: 'success', autoDismiss: true })
       } else {
-        toastContext.addToast('Deu ruim ! kkkkk', { appearance: 'error', autoDismiss: true })
+        toastContext.addToast(errorMessagesEnum.LOGIN, { appearance: 'error', autoDismiss: true })
       }
     })
   }

@@ -7,14 +7,19 @@ import CustomSelect from '../../../components/CustomSelect/CustomSelect'
 import registerUserService from '../../../services/users/register-user'
 import getBadgesService from '../../../services/badges/get-badges'
 
-import userTypesEnum from '../../../common/enums/userType'
+import userTypesEnum from '../../../common/enums/userTypes'
 
 import { useHistory } from 'react-router'
 import { useAuth } from '../../../providers/auth'
+import { useToasts } from 'react-toast-notifications'
+
+import successMessagesEnum from '../../../common/enums/successMessages'
+import errorMessagesEnum from '../../../common/enums/errorMessages'
 
 const UserRegisterForm = props => {
 
   const historyContext = useHistory()
+  const toastContext = useToasts()
 
   const { token } = useAuth()
 
@@ -67,13 +72,19 @@ const UserRegisterForm = props => {
     },
     validate,
     onSubmit: values => {
-      console.log(values)
 
       let badges = values.badges.map(badge => ({ ...badge.value }))
       values.badges = badges
       // setar o loading (controlar estado)
-      registerUserService(token, values)
-      historyContext.push('/usuarios')
+      registerUserService(token, values).then(data => {
+        if (data) {
+          historyContext.push('/usuarios')
+          toastContext.addToast(successMessagesEnum.REGISTER_USER, { appearance: 'success', autoDismiss: true })
+        } else {
+          toastContext.addToast(errorMessagesEnum.REGISTER_USER, { appearance: 'error', autoDismiss: true })
+        }
+      })
+      
     }
   })
 

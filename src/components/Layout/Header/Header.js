@@ -10,7 +10,7 @@ import { useAuth } from '../../../providers/auth'
 
 const Header = props => {
 
-  const authProvider = useAuth()
+  const authContext = useAuth()
 
   return (
     <nav className="nav-header-container">
@@ -21,7 +21,7 @@ const Header = props => {
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0 8px' }}>
           <NavLink to='/#profile_exact_school'><Image image={profileImagePath} className="div-logo-svg-container" /></NavLink>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0 8px' }}>
-            <button className="button-header" onClick={authProvider.logout}>Sair</button>
+            <button className="button-header" onClick={authContext.logout}>Sair</button>
           </div>
         </div>
       </div>

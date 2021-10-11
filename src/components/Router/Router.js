@@ -2,6 +2,7 @@ import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 
 import Login from '../../pages/Login'
 import UserRegisterForm from '../../pages/Users/Register/UserRegisterForm'
+import BadgeRegisterForm from '../../pages/Badges/Register/BadgeRegisterForm'
 import NotFound from '../../pages/NotFound/NotFound'
 
 import BaseLayout from '../../main/BaseLayout'
@@ -25,6 +26,7 @@ const LoggedRoutes = () => (
       <Route component={Param} exact path="/param/:id" />
       <Route component={Users} exact path="/usuarios" />
       <Route component={UserRegisterForm} exact path="/usuarios/cadastrar" />
+      <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />
       <Route component={Quizzes} exact path="/questionarios" />
       <Route component={Topics} exact path="/topicos" />
       <Route component={Classes} exact path="/aulas" />
@@ -44,11 +46,11 @@ const LoginRoutes = () => (
 
 const Router = () => {
 
-  const authProvider = useAuth()
+  const authContext = useAuth()
 
-  if (!authProvider.tokenLoaded) return (<></>)
+  if (!authContext.tokenLoaded) return (<></>)
 
-  const isLogged = !!authProvider.token
+  const isLogged = !!authContext.token
 
   const Routes = isLogged ? LoggedRoutes : LoginRoutes
 
