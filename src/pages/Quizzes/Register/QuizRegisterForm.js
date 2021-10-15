@@ -56,7 +56,6 @@ const QuizRegisterForm = props => {
           historyContext.push('/questionarios')
           toastContext.addToast(successMessagesEnum.REGISTER_QUIZ, { appearance: 'success', autoDismiss: true })
         } else {
-          console.log('aaa')
           toastContext.addToast(errorMessagesEnum.REGISTER_QUIZ, { appearance: 'error', autoDismiss: true })
         }
       })

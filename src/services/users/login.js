@@ -5,6 +5,8 @@ const loginService = (values) =>
     .then(response => {
       const { data } = response
 
+      console.log('data: ', data)
+
       return data
     })
     .catch(err => {

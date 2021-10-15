@@ -21,7 +21,7 @@ const Quizzes = props => {
 
   useEffect(() => {
     getQuizzesService(token, { quizType: '', description: '' }, setQuizData)
-  }, [])
+  }, [token])
 
   const columns = useMemo(() => COLUMNS, [])
 

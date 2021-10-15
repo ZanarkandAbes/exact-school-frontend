@@ -15,16 +15,15 @@ const Users = props => {
 
   const historyContext = useHistory()
 
-  // sempre que utilizar o token fazer dessa forma:
   const { token } = useAuth()
 
   const [userData, setUserData] = useState([])
 
   useEffect(() => {
     getUsersService(token, { name: '', email: '' }, setUserData)
-  }, [])
+  }, [token])
 
-  const columns = useMemo(() => COLUMNS, [])
+  const columns = useMemo(() => COLUMNS(historyContext), [historyContext])
 
   return (
     <div className="users-container">

@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import ColumnFilter from '../filters/ColumnFilter'
 
-export const COLUMNS = [
+export const COLUMNS = (history) => [
   {
     Header: 'E-mail',
     accessor: 'email',
@@ -33,7 +33,6 @@ export const COLUMNS = [
   {
     Header: 'Visualizar',
     Cell: ({ cell }) => (
-      // criar rota path param com o id que tem no valor da linha 
       <button value="teste" onClick={e => console.log('OIE')}>
         Visualizar
       </button>
@@ -43,7 +42,9 @@ export const COLUMNS = [
     Header: 'Editar',
     Cell: ({ cell }) => (
       // criar rota path param com o id que tem no valor da linha 
-      <button value="teste" onClick={e => console.log('KKKKKKKK')}>
+      <button value="teste" onClick={e => {
+        history.push(`/usuarios/atualizar/${cell.row.original._id}`)
+      }}>
         Editar
       </button>
     ),

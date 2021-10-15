@@ -11,7 +11,8 @@ const CustomSelect = ({ onChange, options, value, className, placeholder, isMult
   return (
     <div className={className}>
       <Select
-        value={defaultValue(options, value)}
+        value={isMulti ? value : defaultValue(options, value)}
+        defaultValue={isMulti ? value : defaultValue(options, value)}
         onChange={value => onChange(value)}
         options={options}
         placeholder={placeholder}

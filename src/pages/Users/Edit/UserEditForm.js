@@ -1,13 +1,18 @@
-import './UserRegisterForm.css'
+import './UserEditForm.css'
 import React, { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
 
+import { useParams } from 'react-router-dom'
+
 import CustomSelect from '../../../components/CustomSelect/CustomSelect'
 
-import registerUserService from '../../../services/users/register-user'
+import updateUserService from '../../../services/users/update-user'
 import getBadgesService from '../../../services/badges/get-badges'
+import getUserService from '../../../services/users/get-user'
 
 import userTypesEnum from '../../../common/enums/userTypes'
+
+import formatDate from '../../../common/utils/formatDate'
 
 import { useHistory } from 'react-router'
 import { useAuth } from '../../../providers/auth'
@@ -16,7 +21,7 @@ import { useToasts } from 'react-toast-notifications'
 import successMessagesEnum from '../../../common/enums/successMessages'
 import errorMessagesEnum from '../../../common/enums/errorMessages'
 
-const UserRegisterForm = props => {
+const UserEditForm = props => {
 
   const historyContext = useHistory()
   const toastContext = useToasts()
@@ -25,36 +30,31 @@ const UserRegisterForm = props => {
 
   const [badges, setBadges] = useState([])
 
+  const paramsContext = useParams()
+
+  const getUserData = async () => {
+    const userData = await getUserService(token, paramsContext.id)
+    userData.badges = userData.badges.map(badge => ({ value: badge._id, label: badge.name }))
+    userData.birthDay = formatDate(new Date(userData.birthDay))
+    formik.setValues(userData)
+  }
+
   const getBadgesData = async () => {
     const badgesData = await getBadgesService(token, { badgeType: '', name: '' })
     setBadges(badgesData)
   }
 
   useEffect(() => {
+    getUserData()
     getBadgesData()
   }, [])
 
-  const userTypeSelectOptions = [
-    {
-      value: userTypesEnum.ADMIN,
-      label: 'Administrador'
-    },
-    {
-      value: userTypesEnum.TEACHER,
-      label: 'Professor'
-    },
-    {
-      value: userTypesEnum.STUDENT,
-      label: 'Estudante'
-    }
-  ]
+
 
   const validate = values => {
     const errors = {}
 
     if (!values.email) errors.email = 'O campo de e-mail é obrigatório'
-    if (!values.password) errors.password = 'O campo de senha é obrigatório'
-    if (values.password.length < 1 || values.password.length > 30) errors.password = 'É necessário uma senha entre no mínimo 1 e no máximo 30 caracteres'
     if (!values.name) errors.name = 'O campo de nome é obrigatório'
     if (values.name.length < 2 || values.name.length > 100) errors.name = 'É necessário um nome entre no mínimo 2 e no máximo 100 caracteres'
     if (!values.birthDay) errors.birthDay = 'O campo de data de nascimento é obrigatório'
@@ -77,71 +77,73 @@ const UserRegisterForm = props => {
     onSubmit: values => {
 
       values.badges = values.badges.map(badgeToFind => badges.find(badge => badge._id === badgeToFind.value))
-      
-      registerUserService(token, values).then(data => {
+
+      updateUserService(token, paramsContext.id, values).then(data => {
         if (data) {
           historyContext.push('/usuarios')
-          toastContext.addToast(successMessagesEnum.REGISTER_USER, { appearance: 'success', autoDismiss: true })
+          toastContext.addToast(successMessagesEnum.UPDATE_USER, { appearance: 'success', autoDismiss: true })
         } else {
-          toastContext.addToast(errorMessagesEnum.REGISTER_USER, { appearance: 'error', autoDismiss: true })
+          toastContext.addToast(errorMessagesEnum.UPDATE_USER, { appearance: 'error', autoDismiss: true })
         }
       })
-      
     }
   })
 
+  const userTypeSelectOptions = [
+    {
+      value: userTypesEnum.ADMIN,
+      label: 'Administrador'
+    },
+    {
+      value: userTypesEnum.TEACHER,
+      label: 'Professor'
+    },
+    {
+      value: userTypesEnum.STUDENT,
+      label: 'Estudante'
+    }
+  ]
+
   return (
-    <div className="user-register-form-container">
+    <div className="user-edit-form-container">
       <form>
-        <div className="user-register-form-fields">
+        <div className="user-edit-form-fields">
           <input
             name="email"
             id="email"
             type="email"
             onChange={formik.handleChange}
-            className="user-register-form-input"
+            className="user-edit-form-input"
             placeholder="Digite o E-mail"
             value={formik.values.email}
           />
-          {formik.errors.email ? <div className="user-register-form-errors">{formik.errors.email}</div> : null}
+          {formik.errors.email ? <div className="user-edit-form-errors">{formik.errors.email}</div> : null}
         </div>
-        <div className="user-register-form-fields">
-          <input
-            name="password"
-            id="password"
-            type="password"
-            onChange={formik.handleChange}
-            className="user-register-form-input"
-            placeholder="Digite a Senha"
-            value={formik.values.password}
-          />
-          {formik.errors.password ? <div className="user-register-form-errors">{formik.errors.password}</div> : null}
-        </div>
-        <div className="user-register-form-fields">
+        <div className="user-edit-form-fields">
           <input
             name="name"
             id="name"
             type="text"
             onChange={formik.handleChange}
-            className="user-register-form-input"
+            className="user-edit-form-input"
             placeholder="Digite o Nome"
             value={formik.values.name}
           />
-          {formik.errors.name ? <div className="user-register-form-errors">{formik.errors.name}</div> : null}
+          {formik.errors.name ? <div className="user-edit-form-errors">{formik.errors.name}</div> : null}
         </div>
-        <div className="user-register-form-fields">
+        <div className="user-edit-form-fields">
           <input
             name="birthDay"
             id="birthDay"
             type="date"
             onChange={formik.handleChange}
-            className="user-register-form-input"
+            className="user-edit-form-input"
             placeholder="Digite a Data de Nascimento"
             value={formik.values.birthDay}
           />
-          {formik.errors.birthDay ? <div className="user-register-form-errors">{formik.errors.birthDay}</div> : null}
+          {formik.errors.birthDay ? <div className="user-edit-form-errors">{formik.errors.birthDay}</div> : null}
         </div>
-        <div className="user-register-form-fields">
+        <div className="user-edit-form-fields">
           <CustomSelect
             options={userTypeSelectOptions}
             value={formik.values.userType}
@@ -149,9 +151,9 @@ const UserRegisterForm = props => {
             placeholder="Escolha um tipo de usuário"
             isMulti={false}
           />
-          {formik.errors.userType ? <div className="user-register-form-errors">{formik.errors.userType}</div> : null}
+          {formik.errors.userType ? <div className="user-edit-form-errors">{formik.errors.userType}</div> : null}
         </div>
-        <div className="user-register-form-fields">
+        <div className="user-edit-form-fields">
           <CustomSelect
             options={badges.map(badge => ({ value: badge._id, label: badge.name }))}
             value={formik.values.badges}
@@ -160,25 +162,25 @@ const UserRegisterForm = props => {
             isMulti={true}
           />
         </div>
-        <div className="user-register-form-fields">
+        <div className="user-edit-form-fields">
           <input
             name="totalCoins"
             id="totalCoins"
             type="number"
             onChange={formik.handleChange}
-            className="user-register-form-input"
+            className="user-edit-form-input"
             placeholder="Digite a quantidade de moedas"
             value={formik.values.totalCoins}
           />
         </div>
       </form>
-      <div className="user-register-form-buttons-container">
-        <button className="user-register-form-button-submit" type="button" onClick={() => {
+      <div className="user-edit-form-buttons-container">
+        <button className="user-edit-form-button-submit" type="button" onClick={() => {
           formik.handleSubmit()
         }}>
-          Cadastrar
+          Atualizar
         </button>
-        <button className="user-register-form-button-back" type="button" onClick={() => {
+        <button className="user-edit-form-button-back" type="button" onClick={() => {
           historyContext.push('/usuarios')
         }}>
           Voltar
@@ -188,4 +190,4 @@ const UserRegisterForm = props => {
   )
 }
 
-export default UserRegisterForm
+export default UserEditForm

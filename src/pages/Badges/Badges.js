@@ -21,7 +21,7 @@ const Badges = props => {
 
   useEffect(() => {
     getBadgesService(token, { badgeType: '', name: '' }, setBadgeData)
-  }, [])
+  }, [token])
 
   const columns = useMemo(() => COLUMNS, [])
 

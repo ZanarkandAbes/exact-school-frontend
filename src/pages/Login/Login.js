@@ -23,6 +23,7 @@ const Login = () => {
       if (data) {
         history.push('/')
         authContext.setToken(data.token)
+        authContext.setUserData(data.userData)
         toastContext.addToast(successMessagesEnum.LOGIN, { appearance: 'success', autoDismiss: true })
       } else {
         toastContext.addToast(errorMessagesEnum.LOGIN, { appearance: 'error', autoDismiss: true })

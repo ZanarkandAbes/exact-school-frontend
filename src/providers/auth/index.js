@@ -1,12 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-import { history } from '../../history' 
-
-const AuthContext = createContext({ token: '', setToken: (token) => undefined, tokenLoaded: false, logout: () => undefined })
+const AuthContext = createContext({ 
+    token: '', 
+    setToken: (token) => undefined, 
+    userData: {}, 
+    setUserData: (userData) => undefined, 
+    tokenLoaded: false, logout: () => undefined 
+})
 
 export const AuthProvider = ({ children }) => {
     const [alreadyRanOnce, setAlreadyRanOnce] = useState(false)
     const [token, setToken] = useState('')
+    const [userData, setUserData] = useState({})
     const [tokenLoaded, setTokenLoaded] = useState(false)
 
     useEffect(() => { setAlreadyRanOnce(true) }, [])
@@ -18,15 +23,24 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        if (alreadyRanOnce) localStorage.setItem('app-token', token)
-    }, [token])
+        const LSUserData = localStorage.getItem('app-user-data')
+        if (LSUserData) setUserData(LSUserData)
+    }, [])
+
+    useEffect(() => {
+        if (alreadyRanOnce) {
+            localStorage.setItem('app-token', token)
+            localStorage.setItem('app-user-data', userData)
+        }
+    }, [alreadyRanOnce, token, userData])
 
     const logout = () => {
         setToken('')
+        setUserData({})
     }
 
     return (
-        <AuthContext.Provider value={{ token, setToken, tokenLoaded, logout }}>
+        <AuthContext.Provider value={{ token, setToken, userData, setUserData, tokenLoaded, logout }}>
             {children}
         </AuthContext.Provider>
     )

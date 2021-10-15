@@ -13,7 +13,7 @@ const Topics = props => {
 
   useEffect(() => {
     getTopicsService(token, { topicType: '', title: '' }, setTopicData)
-  }, [])
+  }, [token])
 
   const columns = useMemo(() => COLUMNS, [])
 

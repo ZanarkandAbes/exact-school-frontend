@@ -13,7 +13,7 @@ const Classes = props => {
 
   useEffect(() => {
     getClassesService(token, { classType: '', title: '' }, setClassData)
-  }, [])
+  }, [token])
 
   const columns = useMemo(() => COLUMNS, [])
 
