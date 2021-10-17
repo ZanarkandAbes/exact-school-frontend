@@ -19,9 +19,14 @@ const Badges = props => {
 
   const [badgeData, setBadgeData] = useState([])
 
+  const getBadgesData = async () => {
+    const badgesData = await getBadgesService(token, { badgeType: '', name: '' })
+    setBadgeData(badgesData)
+  }
+
   useEffect(() => {
-    getBadgesService(token, { badgeType: '', name: '' }, setBadgeData)
-  }, [token])
+    getBadgesData()
+  }, [])
 
   const columns = useMemo(() => COLUMNS, [])
 

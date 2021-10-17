@@ -5,6 +5,7 @@ import UserRegisterForm from '../../pages/Users/Register/UserRegisterForm'
 import UserEditForm from '../../pages/Users/Edit/UserEditForm'
 import BadgeRegisterForm from '../../pages/Badges/Register/BadgeRegisterForm'
 import QuizRegisterForm from '../../pages/Quizzes/Register/QuizRegisterForm'
+import TopicRegisterForm from '../../pages/Topics/Register/TopicRegisterForm'
 import NotFound from '../../pages/NotFound/NotFound'
 
 import BaseLayout from '../../main/BaseLayout'
@@ -31,6 +32,7 @@ const LoggedRoutes = () => (
       <Route component={UserEditForm} exact path="/usuarios/atualizar/:id" />
       <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />
       <Route component={QuizRegisterForm} exact path="/questionarios/cadastrar" />
+      <Route component={TopicRegisterForm} exact path="/topicos/cadastrar" />
       <Route component={Quizzes} exact path="/questionarios" />
       <Route component={Topics} exact path="/topicos" />
       <Route component={Classes} exact path="/aulas" />

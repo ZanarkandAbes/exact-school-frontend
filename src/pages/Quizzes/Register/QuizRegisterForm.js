@@ -50,7 +50,7 @@ const QuizRegisterForm = props => {
     },
     validate,
     onSubmit: values => {
-      // setar o loading (controlar estado)
+      
       registerQuizService(token, values).then(data => {
         if (data) {
           historyContext.push('/questionarios')

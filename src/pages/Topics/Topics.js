@@ -1,3 +1,5 @@
+import './Topics.css'
+
 import React, { useState, useEffect, useMemo } from 'react'
 
 import getTopicsService from '../../services/topics/get-topics'
@@ -6,14 +8,25 @@ import { COLUMNS } from '../../components/Table/topics/columns'
 
 import Table from '../../components/Table/Table'
 
+import { useAuth } from '../../providers/auth'
+import { useHistory } from 'react-router'
+
 const Topics = props => {
 
-  const token = localStorage.getItem('app-token')
+  const historyContext = useHistory()
+
+  const { token } = useAuth()
+
   const [topicData, setTopicData] = useState([])
 
+  const getTopicsData = async () => {
+    const topicsData = await getTopicsService(token, { topicType: '', title: '' })
+    setTopicData(topicsData)
+  }
+
   useEffect(() => {
-    getTopicsService(token, { topicType: '', title: '' }, setTopicData)
-  }, [token])
+    getTopicsData()
+  }, [])
 
   const columns = useMemo(() => COLUMNS, [])
 
@@ -21,6 +34,13 @@ const Topics = props => {
     <div className="topics-container">
       <h1>Listagem de tópicos</h1>
       <h2>Bem vindo!</h2>
+      <div className="topics-content-container">
+        <button className="topic-register-button" onClick={() => {
+          historyContext.push('/topicos/cadastrar')
+        }}>
+          Cadastrar Tópico
+        </button>
+      </div>
       <Table data={topicData} columns={columns} />
     </div>
   )
