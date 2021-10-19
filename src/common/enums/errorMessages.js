@@ -4,5 +4,6 @@ module.exports = {
   REGISTER_BADGE: 'A medalha já existe.',
   REGISTER_QUIZ: 'A pergunta já existe.',
   REGISTER_TOPIC: 'O tópico já existe.',
+  REGISTER_CLASS: 'A aula já existe.',
   UPDATE_USER: 'A atualização falhou.'
 }

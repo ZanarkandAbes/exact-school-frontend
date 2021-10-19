@@ -1,0 +1,24 @@
+.classes-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.classes-content-container {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.class-register-button {
+  background: #00fd87;
+  color: #fdfdfd;
+  padding: .5rem 2rem;
+  border: none;
+  border-radius: 5px;
+  margin-top: 2rem;
+}
+
+.class-register-button:hover {
+  display: flex;
+  cursor: pointer;
+}

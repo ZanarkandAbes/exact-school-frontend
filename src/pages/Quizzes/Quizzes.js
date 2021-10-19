@@ -19,9 +19,14 @@ const Quizzes = props => {
 
   const [quizData, setQuizData] = useState([])
 
+  const getQuizzesData = async () => {
+    const quizzesData = await getQuizzesService(token, { quizType: '', description: '' })
+    setQuizData(quizzesData)
+  }
+
   useEffect(() => {
-    getQuizzesService(token, { quizType: '', description: '' }, setQuizData)
-  }, [token])
+    getQuizzesData()
+  }, [])
 
   const columns = useMemo(() => COLUMNS, [])
 
