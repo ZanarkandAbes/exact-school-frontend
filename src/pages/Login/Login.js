@@ -22,7 +22,9 @@ const Login = () => {
     loginService(values).then(data => {
       if (data) {
         history.push('/')
+        localStorage.setItem('app-token', JSON.stringify(data.token))
         authContext.setToken(data.token)
+        localStorage.setItem('app-user-data', JSON.stringify(data.userData))
         authContext.setUserData(data.userData)
         toastContext.addToast(successMessagesEnum.LOGIN, { appearance: 'success', autoDismiss: true })
       } else {

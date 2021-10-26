@@ -77,13 +77,9 @@ const ClassRegisterForm = props => {
     validate,
     onSubmit: values => {
 
-      console.log('values antes:', values)
-
       values.userId = userData._id
 
       values.quizzes = values.quizzes.map(quizToFind => quizzes.find(quiz => quiz._id === quizToFind.value))
-
-      console.log('values depois:', values)
 
       registerClassService(token, values).then(data => {
         if (data) {

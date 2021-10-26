@@ -13,7 +13,6 @@ import BaseLayout from '../../main/BaseLayout'
 
 import Home from '../../pages/Home/Home'
 import About from '../../pages/About/About'
-import Param from '../../pages/Param/Param'
 import Users from '../../pages/Users/Users'
 import Quizzes from '../../pages/Quizzes/Quizzes'
 import Topics from '../../pages/Topics/Topics'
@@ -23,24 +22,61 @@ import Badges from '../../pages/Badges/Badges'
 import { history } from '../../history'
 import { useAuth } from '../../providers/auth'
 
-const LoggedRoutes = () => (
+const hasAccess = (userType, route) => {
+  if (userType === 'TEACHER') {
+    switch (route) {
+      case '/usuarios':
+        return false
+      case '/usuarios/cadastrar':
+        return false
+      case '/usuarios/atualizar/:id':
+        return false
+      case '/medalhas/cadastrar':
+        return false
+      default:
+        return true
+    }
+  } else if (userType === 'STUDENT') {
+    switch (route) {
+      case '/usuarios':
+        return false
+      case '/usuarios/cadastrar':
+        return false
+      case '/usuarios/atualizar/:id':
+        return false
+      case '/medalhas/cadastrar':
+        return false
+      case '/aulas/cadastrar':
+        return false
+      case '/questionarios':
+        return false
+      case '/questionarios/cadastrar':
+        return false
+      default:
+        return true
+    }
+  }
+  return true
+}
+
+const LoggedRoutes = ({ userType }) => (
   <BaseLayout>
     <Switch>
-      <Route component={About} exact path="/about" />
-      <Route component={Param} exact path="/param/:id" />
-      <Route component={Users} exact path="/usuarios" />
-      <Route component={UserRegisterForm} exact path="/usuarios/cadastrar" />
-      <Route component={UserEditForm} exact path="/usuarios/atualizar/:id" />
-      <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />
-      <Route component={ClassRegisterForm} exact path="/aulas/cadastrar" />
-      <Route component={QuizRegisterForm} exact path="/questionarios/cadastrar" />
-      <Route component={TopicRegisterForm} exact path="/topicos/cadastrar" />
-      <Route component={Quizzes} exact path="/questionarios" />
-      <Route component={Topics} exact path="/topicos" />
-      <Route component={Classes} exact path="/aulas" />
-      <Route component={Badges} exact path="/medalhas" />
-      <Route component={Home} exact path="/" />
-      <Route component={NotFound} path="*" />
+      {hasAccess(userType, '/about') && <Route component={About} exact path="/about" />}
+      {hasAccess(userType, '/usuarios') && <Route component={Users} exact path="/usuarios" />}
+      {hasAccess(userType, '/usuarios/cadastrar') && <Route component={UserRegisterForm} exact path="/usuarios/cadastrar" />}
+      {hasAccess(userType, '/usuarios/atualizar/:id') && <Route component={UserEditForm} exact path="/usuarios/atualizar/:id" />}
+      {hasAccess(userType, '/medalhas/cadastrar') && <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />}
+      {hasAccess(userType, '/aulas/cadastrar') && <Route component={ClassRegisterForm} exact path="/aulas/cadastrar" />}
+      {hasAccess(userType, '/questionarios/cadastrar') && <Route component={QuizRegisterForm} exact path="/questionarios/cadastrar" />}
+      {hasAccess(userType, '/topicos/cadastrar') && <Route component={TopicRegisterForm} exact path="/topicos/cadastrar" />}
+      {hasAccess(userType, '/questionarios') && <Route component={Quizzes} exact path="/questionarios" />}
+      {hasAccess(userType, '/topicos') && <Route component={Topics} exact path="/topicos" />}
+      {hasAccess(userType, '/aulas') && <Route component={Classes} exact path="/aulas" />}
+      {hasAccess(userType, '/medalhas') && <Route component={Badges} exact path="/medalhas" />}
+      {hasAccess(userType, '/') && <Route component={Home} exact path="/" />}
+      {hasAccess(userType, '*') && <Route component={NotFound} path="*" />}
+      <Redirect to="/" from="*" />
     </Switch>
   </BaseLayout>
 )
@@ -54,17 +90,17 @@ const LoginRoutes = () => (
 
 const Router = () => {
 
-  const authContext = useAuth()
+  const { token, tokenLoaded, userData } = useAuth()
 
-  if (!authContext.tokenLoaded) return (<></>)
+  if (!tokenLoaded) return (<></>)
 
-  const isLogged = !!authContext.token
+  const isLogged = !!token
 
   const Routes = isLogged ? LoggedRoutes : LoginRoutes
 
   return (
     <BrowserRouter history={history}>
-      <Routes />
+      <Routes userType={userData?.userType} />
     </BrowserRouter>
   )
 }

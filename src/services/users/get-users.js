@@ -1,12 +1,9 @@
 import axios from 'axios'
 
-const getUsersService = async (token, filters, setUserData) => {
-
-  await axios.get(`http://localhost:3003/exact-school/users?name=${filters.name}&email=${filters.email}`, { params: { token: token } } )
+const getUsersService = async (token, filters) =>
+  await axios.get(`http://localhost:3003/exact-school/users?name=${filters.name}&email=${filters.email}`, { params: { token: token } })
     .then(response => {
       const { data } = response
-      
-      setUserData(data)
 
       return data
     })
@@ -14,6 +11,5 @@ const getUsersService = async (token, filters, setUserData) => {
       console.log('Error:')
       console.log(err)
     })
-}
 
 export default getUsersService

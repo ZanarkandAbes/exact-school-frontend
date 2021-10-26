@@ -12,6 +12,14 @@
   display: flex;
 }
 
+.menu li.show {
+  display: flex
+}
+
+.menu li.hide {
+  display: none
+}
+
 .menu li a {
   flex: 1;
   padding: 10px;

@@ -17,13 +17,22 @@ const Users = props => {
 
   const { token } = useAuth()
 
+  const authUserData = useAuth().userData
+
   const [userData, setUserData] = useState([])
 
-  useEffect(() => {
-    getUsersService(token, { name: '', email: '' }, setUserData)
-  }, [token])
+  const getUsersData = async () => {
+    const usersData = await getUsersService(token, { name: '', email: '' })
+    setUserData(usersData)
+  }
 
-  const columns = useMemo(() => COLUMNS(historyContext), [historyContext])
+  useEffect(() => {
+    getUsersData()
+  }, [])
+
+  const columns = useMemo(() => COLUMNS(historyContext, token, getUsersData, authUserData.userType), [historyContext, token])
+
+  console.log('authUserData', authUserData)
 
   return (
     <div className="users-container">

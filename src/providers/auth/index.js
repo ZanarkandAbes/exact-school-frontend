@@ -18,21 +18,21 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const LSToken = localStorage.getItem('app-token')
-        if (LSToken) setToken(LSToken)
+        if (LSToken) setToken(JSON.parse(LSToken))
         setTokenLoaded(true)
     }, [])
 
     useEffect(() => {
         const LSUserData = localStorage.getItem('app-user-data')
-        if (LSUserData) setUserData(LSUserData)
+        if (LSUserData) setUserData(JSON.parse(LSUserData))
     }, [])
 
-    useEffect(() => {
-        if (alreadyRanOnce) {
-            localStorage.setItem('app-token', token)
-            localStorage.setItem('app-user-data', userData)
-        }
-    }, [alreadyRanOnce, token, userData])
+    // useEffect(() => {
+    //     if (alreadyRanOnce) {
+    //         localStorage.setItem('app-token', token)
+    //         localStorage.setItem('app-user-data', userData)
+    //     }
+    // }, [alreadyRanOnce, token, userData])
 
     const logout = () => {
         setToken('')
