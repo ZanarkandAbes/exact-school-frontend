@@ -30,7 +30,7 @@ const Users = props => {
     getUsersData()
   }, [])
 
-  const columns = useMemo(() => COLUMNS(historyContext, token, getUsersData, authUserData.userType), [historyContext, token])
+  const columns = useMemo(() => COLUMNS(historyContext, token, getUsersData, authUserData.userType), [])
 
   console.log('authUserData', authUserData)
 

@@ -17,6 +17,8 @@ const Quizzes = props => {
 
   const { token } = useAuth()
 
+  const authUserData = useAuth().userData
+
   const [quizData, setQuizData] = useState([])
 
   const getQuizzesData = async () => {
@@ -28,7 +30,7 @@ const Quizzes = props => {
     getQuizzesData()
   }, [])
 
-  const columns = useMemo(() => COLUMNS, [])
+  const columns = useMemo(() => COLUMNS(historyContext, token, getQuizzesData, authUserData.userType), [])
 
   return (
     <div className="quizzes-container">

@@ -5,5 +5,6 @@ module.exports = {
   REGISTER_QUIZ: 'A pergunta já existe.',
   REGISTER_TOPIC: 'O tópico já existe.',
   REGISTER_CLASS: 'A aula já existe.',
-  UPDATE_USER: 'A atualização falhou.'
+  UPDATE_USER: 'A atualização do usuário falhou.',
+  UPDATE_QUIZ: 'A atualização da pergunta falhou.'
 }

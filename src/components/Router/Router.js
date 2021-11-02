@@ -5,6 +5,7 @@ import UserRegisterForm from '../../pages/Users/Register/UserRegisterForm'
 import UserEditForm from '../../pages/Users/Edit/UserEditForm'
 import BadgeRegisterForm from '../../pages/Badges/Register/BadgeRegisterForm'
 import QuizRegisterForm from '../../pages/Quizzes/Register/QuizRegisterForm'
+import QuizEditForm from '../../pages/Quizzes/Edit/QuizEditForm'
 import TopicRegisterForm from '../../pages/Topics/Register/TopicRegisterForm'
 import ClassRegisterForm from '../../pages/Classes/Register/ClassRegisterForm'
 import NotFound from '../../pages/NotFound/NotFound'
@@ -52,6 +53,8 @@ const hasAccess = (userType, route) => {
         return false
       case '/questionarios/cadastrar':
         return false
+      case '/questionarios/editar':
+        return false
       default:
         return true
     }
@@ -69,6 +72,7 @@ const LoggedRoutes = ({ userType }) => (
       {hasAccess(userType, '/medalhas/cadastrar') && <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />}
       {hasAccess(userType, '/aulas/cadastrar') && <Route component={ClassRegisterForm} exact path="/aulas/cadastrar" />}
       {hasAccess(userType, '/questionarios/cadastrar') && <Route component={QuizRegisterForm} exact path="/questionarios/cadastrar" />}
+      {hasAccess(userType, '/questionarios/atualizar/:id') && <Route component={QuizEditForm} exact path="/questionarios/atualizar/:id" />}
       {hasAccess(userType, '/topicos/cadastrar') && <Route component={TopicRegisterForm} exact path="/topicos/cadastrar" />}
       {hasAccess(userType, '/questionarios') && <Route component={Quizzes} exact path="/questionarios" />}
       {hasAccess(userType, '/topicos') && <Route component={Topics} exact path="/topicos" />}
