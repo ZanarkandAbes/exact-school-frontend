@@ -98,7 +98,7 @@ export const COLUMNS = (history, token, getTopicsData, userType) => {
         <button value="delete-topic-button" onClick={e => {
           confirmAlert({
             title: 'Excluir',
-            message: 'Você tem certeza de que quer excluir essa pergunta?',
+            message: 'Você tem certeza de que quer excluir esse tópico?',
             buttons: [
               {
                 label: 'Sim',

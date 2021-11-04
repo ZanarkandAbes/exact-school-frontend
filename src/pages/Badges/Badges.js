@@ -17,6 +17,8 @@ const Badges = props => {
 
   const { token } = useAuth()
 
+  const authUserData = useAuth().userData
+
   const [badgeData, setBadgeData] = useState([])
 
   const getBadgesData = async () => {
@@ -28,7 +30,7 @@ const Badges = props => {
     getBadgesData()
   }, [])
 
-  const columns = useMemo(() => COLUMNS, [])
+  const columns = useMemo(() => COLUMNS(historyContext, token, getBadgesData, authUserData.userType), [])
 
   return (
     <div className="badges-container">

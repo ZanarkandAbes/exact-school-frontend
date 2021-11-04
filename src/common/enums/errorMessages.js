@@ -7,5 +7,6 @@ module.exports = {
   REGISTER_CLASS: 'A aula já existe.',
   UPDATE_USER: 'A atualização do usuário falhou.',
   UPDATE_QUIZ: 'A atualização da pergunta falhou.',
-  UPDATE_TOPIC: 'A atualização do tópico falhou.'
+  UPDATE_TOPIC: 'A atualização do tópico falhou.',
+  UPDATE_BADGE: 'A atualização da medalha falhou.'
 }

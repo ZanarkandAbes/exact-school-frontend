@@ -1,10 +1,13 @@
-import './BadgeRegisterForm.css'
-import React from 'react'
+import './BadgeEditForm.css'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
+
+import { useParams } from 'react-router-dom'
 
 import CustomSelect from '../../../components/CustomSelect/CustomSelect'
 
-import registerBadgeService from '../../../services/badges/register-badge'
+import updateBadgeService from '../../../services/badges/update-badge'
+import getBadgeService from '../../../services/badges/get-badge'
 
 import badgeTypesEnum from '../../../common/enums/badgeTypes'
 
@@ -15,12 +18,14 @@ import { useToasts } from 'react-toast-notifications'
 import successMessagesEnum from '../../../common/enums/successMessages'
 import errorMessagesEnum from '../../../common/enums/errorMessages'
 
-const BadgeRegisterForm = props => {
+const BadgeEditForm = props => {
 
   const historyContext = useHistory()
   const toastContext = useToasts()
 
   const { token } = useAuth()
+
+  const paramsContext = useParams()
 
   const badgeTypeSelectOptions = [
     {
@@ -28,6 +33,15 @@ const BadgeRegisterForm = props => {
       label: 'Conquista'
     }
   ]
+
+  const getBadgeData = async () => {
+    const badgeData = await getBadgeService(token, paramsContext.id)
+    formik.setValues(badgeData)
+  }
+
+  useEffect(() => {
+    getBadgeData()
+  }, [])
 
   const validate = values => {
     const errors = {}
@@ -48,12 +62,13 @@ const BadgeRegisterForm = props => {
     },
     validate,
     onSubmit: values => {
-      registerBadgeService(token, values).then(data => {
+      
+      updateBadgeService(token, paramsContext.id, values).then(data => {
         if (data) {
           historyContext.push('/medalhas')
-          toastContext.addToast(successMessagesEnum.REGISTER_BADGE, { appearance: 'success', autoDismiss: true })
+          toastContext.addToast(successMessagesEnum.UPDATE_TOPIC, { appearance: 'success', autoDismiss: true })
         } else {
-          toastContext.addToast(errorMessagesEnum.REGISTER_BADGE, { appearance: 'error', autoDismiss: true })
+          toastContext.addToast(errorMessagesEnum.UPDATE_TOPIC, { appearance: 'error', autoDismiss: true })
         }
       })
 
@@ -61,33 +76,33 @@ const BadgeRegisterForm = props => {
   })
 
   return (
-    <div className="badge-register-form-container">
+    <div className="badge-edit-form-container">
       <form>
-        <div className="badge-register-form-fields">
+        <div className="badge-edit-form-fields">
           <input
             name="name"
             id="name"
             type="text"
             onChange={formik.handleChange}
-            className="badge-register-form-input"
+            className="badge-edit-form-input"
             placeholder="Digite o Nome"
             value={formik.values.name}
           />
-          {formik.errors.name ? <div className="badge-register-form-errors">{formik.errors.name}</div> : null}
+          {formik.errors.name ? <div className="badge-edit-form-errors">{formik.errors.name}</div> : null}
         </div>
-        <div className="badge-register-form-fields">
+        <div className="badge-edit-form-fields">
           <input
             name="price"
             id="price"
             type="number"
             onChange={formik.handleChange}
-            className="badge-register-form-input"
+            className="badge-edit-form-input"
             placeholder="Digite a quantidade de moedas que a medalha custa"
             value={formik.values.price}
           />
-          {formik.errors.price ? <div className="quiz-register-form-errors">{formik.errors.price}</div> : null}
+          {formik.errors.price ? <div className="quiz-edit-form-errors">{formik.errors.price}</div> : null}
         </div>
-        <div className="badge-register-form-fields">
+        <div className="badge-edit-form-fields">
           <CustomSelect
             options={badgeTypeSelectOptions}
             value={formik.values.badgeType}
@@ -95,16 +110,16 @@ const BadgeRegisterForm = props => {
             placeholder="Escolha um tipo de medalha"
             isMulti={false}
           />
-          {formik.errors.badgeType ? <div className="badge-register-form-errors">{formik.errors.badgeType}</div> : null}
+          {formik.errors.badgeType ? <div className="badge-edit-form-errors">{formik.errors.badgeType}</div> : null}
         </div>
       </form>
-      <div className="badge-register-form-buttons-container">
-        <button className="badge-register-form-button-submit" type="button" onClick={() => {
+      <div className="badge-edit-form-buttons-container">
+        <button className="badge-edit-form-button-submit" type="button" onClick={() => {
           formik.handleSubmit()
         }}>
-          Cadastrar
+          Atualizar
         </button>
-        <button className="badge-register-form-button-back" type="button" onClick={() => {
+        <button className="badge-edit-form-button-back" type="button" onClick={() => {
           historyContext.push('/medalhas')
         }}>
           Voltar
@@ -114,4 +129,4 @@ const BadgeRegisterForm = props => {
   )
 }
 
-export default BadgeRegisterForm
+export default BadgeEditForm
