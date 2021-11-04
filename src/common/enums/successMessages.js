@@ -6,5 +6,6 @@ module.exports = {
   REGISTER_TOPIC: 'Você cadastrou um tópico com sucesso!',
   REGISTER_CLASS: 'Você cadastro uma aula com sucesso!',
   UPDATE_USER: 'Você atualizou o usuário com sucesso!',
-  UPDATE_QUIZ: 'Você atualizou a pergunta com sucesso!'
+  UPDATE_QUIZ: 'Você atualizou a pergunta com sucesso!',
+  UPDATE_TOPIC: 'Você atualizou o tópico com sucesso!'
 }

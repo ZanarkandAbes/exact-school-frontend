@@ -32,8 +32,6 @@ const Users = props => {
 
   const columns = useMemo(() => COLUMNS(historyContext, token, getUsersData, authUserData.userType), [])
 
-  console.log('authUserData', authUserData)
-
   return (
     <div className="users-container">
       <h1>Listagem de usuários</h1>

@@ -17,6 +17,8 @@ const Topics = props => {
 
   const { token } = useAuth()
 
+  const authUserData = useAuth().userData
+  
   const [topicData, setTopicData] = useState([])
 
   const getTopicsData = async () => {
@@ -28,7 +30,7 @@ const Topics = props => {
     getTopicsData()
   }, [])
 
-  const columns = useMemo(() => COLUMNS, [])
+  const columns = useMemo(() => COLUMNS(historyContext, token, getTopicsData, authUserData.userType), [])
 
   return (
     <div className="topics-container">
