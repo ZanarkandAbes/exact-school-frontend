@@ -9,13 +9,17 @@
   padding-bottom: 8px;
 }
 
-.badge-register-button {
+.badge-register-button-show {
   background: #00fd87;
   color: #fdfdfd;
   padding: .5rem 2rem;
   border: none;
   border-radius: 5px;
   margin-top: 2rem;
+}
+
+.badge-register-button-hide {
+  display: none;
 }
 
 .badge-register-button:hover {

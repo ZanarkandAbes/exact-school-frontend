@@ -66,9 +66,9 @@ const BadgeEditForm = props => {
       updateBadgeService(token, paramsContext.id, values).then(data => {
         if (data) {
           historyContext.push('/medalhas')
-          toastContext.addToast(successMessagesEnum.UPDATE_TOPIC, { appearance: 'success', autoDismiss: true })
+          toastContext.addToast(successMessagesEnum.UPDATE_BADGE, { appearance: 'success', autoDismiss: true })
         } else {
-          toastContext.addToast(errorMessagesEnum.UPDATE_TOPIC, { appearance: 'error', autoDismiss: true })
+          toastContext.addToast(errorMessagesEnum.UPDATE_BADGE, { appearance: 'error', autoDismiss: true })
         }
       })
 

@@ -11,6 +11,31 @@ import Table from '../../components/Table/Table'
 import { useAuth } from '../../providers/auth'
 import { useHistory } from 'react-router'
 
+const hasAccess = (userType, route) => {
+  if (userType === 'TEACHER') {
+    switch (route) {
+      case '/usuarios':
+        return false
+      case '/medalhas/cadastrar':
+        return false
+      default:
+        return true
+    }
+  } else if (userType === 'STUDENT') {
+    switch (route) {
+      case '/usuarios':
+        return false
+      case '/questionarios':
+        return false
+      case '/medalhas/cadastrar':
+        return false
+      default:
+        return true
+    }
+  }
+  return true
+}
+
 const Badges = props => {
 
   const historyContext = useHistory()
@@ -37,7 +62,7 @@ const Badges = props => {
       <h1>Listagem de medalhas</h1>
       <h2>Bem vindo!</h2>
       <div className="badges-content-container">
-        <button className="badge-register-button" onClick={() => {
+        <button className={hasAccess(authUserData.userType, "/medalhas/cadastrar") ? "badge-register-button-show" : "badge-register-button-hide"} onClick={() => {
           historyContext.push('/medalhas/cadastrar')
         }}>
           Cadastrar Medalha

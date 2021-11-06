@@ -18,7 +18,7 @@ const Topics = props => {
   const { token } = useAuth()
 
   const authUserData = useAuth().userData
-  
+
   const [topicData, setTopicData] = useState([])
 
   const getTopicsData = async () => {
