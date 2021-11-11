@@ -1,6 +1,7 @@
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 
 import Login from '../../pages/Login'
+import UserDetailsForm from '../../pages/Users/Details/UserDetailsForm'
 import UserRegisterForm from '../../pages/Users/Register/UserRegisterForm'
 import UserEditForm from '../../pages/Users/Edit/UserEditForm'
 import BadgeRegisterForm from '../../pages/Badges/Register/BadgeRegisterForm'
@@ -26,10 +27,14 @@ import Badges from '../../pages/Badges/Badges'
 import { history } from '../../history'
 import { useAuth } from '../../providers/auth'
 
+import Quiz from '../Quiz/Quiz'
+
 const hasAccess = (userType, route) => {
   if (userType === 'TEACHER') {
     switch (route) {
       case '/usuarios':
+        return false
+      case '/usuarios/visualizar/:id':
         return false
       case '/usuarios/cadastrar':
         return false
@@ -47,6 +52,8 @@ const hasAccess = (userType, route) => {
   } else if (userType === 'STUDENT') {
     switch (route) {
       case '/usuarios':
+        return false
+      case '/usuarios/visualizar/:id':
         return false
       case '/usuarios/cadastrar':
         return false
@@ -80,6 +87,7 @@ const LoggedRoutes = ({ userType }) => (
     <Switch>
       {hasAccess(userType, '/about') && <Route component={About} exact path="/about" />}
       {hasAccess(userType, '/usuarios') && <Route component={Users} exact path="/usuarios" />}
+      {hasAccess(userType, '/usuarios/visualizar/:id') && <Route component={UserDetailsForm} exact path="/usuarios/visualizar/:id" />}
       {hasAccess(userType, '/usuarios/cadastrar') && <Route component={UserRegisterForm} exact path="/usuarios/cadastrar" />}
       {hasAccess(userType, '/usuarios/atualizar/:id') && <Route component={UserEditForm} exact path="/usuarios/atualizar/:id" />}
       {hasAccess(userType, '/medalhas/cadastrar') && <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />}
@@ -94,6 +102,7 @@ const LoggedRoutes = ({ userType }) => (
       {hasAccess(userType, '/topicos') && <Route component={Topics} exact path="/topicos" />}
       {hasAccess(userType, '/aulas') && <Route component={Classes} exact path="/aulas" />}
       {hasAccess(userType, '/medalhas') && <Route component={Badges} exact path="/medalhas" />}
+      {hasAccess(userType, '/quiz') && <Route component={Quiz} exact path="/quiz" />}
       {hasAccess(userType, '/') && <Route component={Home} exact path="/" />}
       {hasAccess(userType, '*') && <Route component={NotFound} path="*" />}
       <Redirect to="/" from="*" />
