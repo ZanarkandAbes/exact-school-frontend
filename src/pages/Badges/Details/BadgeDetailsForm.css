@@ -1,0 +1,18 @@
+.badge-card-button-container {
+  display: flex;
+  justify-content: right;
+  padding: 8px;
+}
+
+.badge-view-button-back:hover {
+  display: flex;
+  cursor: pointer;
+}
+
+.badge-view-button-back {
+  background: #48CAE4;
+  color: #fdfdfd;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}

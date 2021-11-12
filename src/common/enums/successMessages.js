@@ -8,5 +8,6 @@ module.exports = {
   UPDATE_USER: 'Você atualizou o usuário com sucesso!',
   UPDATE_QUIZ: 'Você atualizou a pergunta com sucesso!',
   UPDATE_TOPIC: 'Você atualizou o tópico com sucesso!',
-  UPDATE_BADGE: 'Você atualizou a medalha com sucesso!'
+  UPDATE_BADGE: 'Você atualizou a medalha com sucesso!',
+  BUY_BADGE: 'Você comprou a medalha com sucesso!'
 }

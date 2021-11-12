@@ -60,7 +60,9 @@ export const COLUMNS = (history, token, getBadgesData, userType) => {
     columns.push({
       Header: 'Visualizar',
       Cell: ({ cell }) => (
-        <button value="view-badge-button" onClick={e => console.log('OIE')}>
+        <button value="view-badge-button" onClick={e => {
+          history.push(`/medalhas/visualizar/${cell.row.original._id}`)
+        }}>
           Visualizar
         </button>
       )

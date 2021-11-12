@@ -65,7 +65,9 @@ export const COLUMNS = (history, token, getQuizzesData, userType) => {
     columns.push({
       Header: 'Visualizar',
       Cell: ({ cell }) => (
-        <button value="view-quiz-button" onClick={e => console.log('OIE')}>
+        <button value="view-quiz-button" onClick={e => {
+          history.push(`/questionarios/visualizar/${cell.row.original._id}`)
+        }}>
           Visualizar
         </button>
       )
