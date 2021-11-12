@@ -5,26 +5,32 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 
 import { IconButton, Typography } from '@material-ui/core'
-import { DeleteOutlined } from '@material-ui/icons'
+import { MoneyOutlined } from '@material-ui/icons'
 
 import { format } from 'date-fns'
 
 const UserCard = ({ userData }) => {
 
-  console.log('userData dentro do card:', userData)
+  let badges = ''
+
+  userData.badges.map(badge => {
+
+    if (badges === '') {
+      badges = badge.name
+    } else {
+      badges = badges + ';' + badge.name
+    }
+
+    return badge
+  })
 
   return (
     <div>
-      {`E-mail: ${userData.email}`}
-      {`Data de Nascimento: ${format(new Date(userData.birthDay), 'dd/MM/yyyy')}`}
-      {`Tipo de Usuário: ${userData.userType}`}
-      {`Medalhas: ${userData.badges.map(badge => badge.name)}`}
-      {`Moedas: ${userData.totalCoins.toFixed(2)}`}
-      {/* <Card>
+      <Card>
         <CardHeader
           action={
-            <IconButton>
-              <DeleteOutlined />
+            <IconButton onClick={e => console.log('aaaa')} >
+              <MoneyOutlined />
             </IconButton>
           }
           title={`Dados do Usuário ${userData.name}`}
@@ -41,13 +47,13 @@ const UserCard = ({ userData }) => {
             {`Tipo de Usuário: ${userData.userType}`}
           </Typography>
           <Typography>
-            {`Medalhas: ${userData.badges.map(badge => badge.name)}`}
+            {`Medalhas: ${badges}`}
           </Typography>
           <Typography>
             {`Moedas: ${userData.totalCoins.toFixed(2)}`}
           </Typography>
         </CardContent>
-      </Card> */}
+      </Card>
     </div>
   )
 }

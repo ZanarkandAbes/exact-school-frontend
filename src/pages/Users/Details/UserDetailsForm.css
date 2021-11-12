@@ -1,0 +1,18 @@
+.user-card-button-container {
+  display: flex;
+  justify-content: right;
+  padding: 8px;
+}
+
+.user-view-button-back:hover {
+  display: flex;
+  cursor: pointer;
+}
+
+.user-view-button-back {
+  background: #48CAE4;
+  color: #fdfdfd;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}

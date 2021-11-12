@@ -9,12 +9,10 @@ import UserCard from './UserCard'
 
 import { useHistory } from 'react-router'
 import { useAuth } from '../../../providers/auth'
-import { useToasts } from 'react-toast-notifications'
 
 const UserDetailsForm = props => {
 
   const historyContext = useHistory()
-  const toastContext = useToasts()
 
   const { token } = useAuth()
 
@@ -23,46 +21,26 @@ const UserDetailsForm = props => {
   const paramsContext = useParams()
 
   const getUserData = async () => {
-    let unmounted = false
     const userData = await getUserService(token, paramsContext.id)
-    setTimeout(() => {
-      if (!unmounted) {
-        setUserData(userData)
-      }
-    })
-    return () => {
-      unmounted = true
-    }
-  }
-
-  let badges = ''
-
-  const formatBadges = async () => {
-
-    if (!!userData.badges) {
-      await userData.badges.map(badge => {
-
-        if (badges === '') {
-          badges = badge.name
-        } else {
-          badges = badges + ';' + badge.name
-        }
-
-        return badge
-      })
-    }
+    setUserData(userData)
   }
 
   useEffect(() => {
     getUserData()
-    formatBadges()
   }, [])
 
-  console.log('userData', userData)
+  if (!userData.badges) return 'Carregando...'
 
   return (
-    <div>
+    <div className="user-card-container">
       <UserCard userData={userData} />
+      <div className="user-card-button-container">
+        <button className="user-view-button-back" type="button" onClick={() => {
+          historyContext.push('/usuarios')
+        }}>
+          Voltar
+        </button>
+      </div>
     </div>
   )
 }

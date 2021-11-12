@@ -17,11 +17,11 @@ const Header = props => {
       <div className="div-header-container">
         <div className="div-logo-svg-container">
           {/* <Image image={logoImagePath} className="div-logo-svg-container" /> */}
-          Exact-School
+          <h1>Exact-School</h1>
         </div>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0 8px' }}>
           {/* <NavLink to='/#profile_exact_school'><Image image={profileImagePath} className="div-logo-svg-container" /></NavLink> */}
-          Perfil
+          <h1>Perfil</h1>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0 8px' }}>
             <button className="button-header" onClick={authContext.logout}>Sair</button>
           </div>
