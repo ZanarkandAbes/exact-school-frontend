@@ -31,8 +31,6 @@ const QuizDetailsForm = props => {
 
   if (!quizData.description) return 'Carregando...'
 
-  console.log('quizData', quizData)
-
   return (
     <div className="quiz-card-container">
       <QuizCard quizData={quizData} />

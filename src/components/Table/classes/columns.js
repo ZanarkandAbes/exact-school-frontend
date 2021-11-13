@@ -53,7 +53,9 @@ export const COLUMNS = (history, token, getClassesData, userType) => {
     columns.push({
       Header: 'Visualizar',
       Cell: ({ cell }) => (
-        <button value="view-class-button" onClick={e => console.log('OIE')}>
+        <button value="view-class-button" onClick={e => {
+          history.push(`/aulas/visualizar/${cell.row.original._id}`)
+        }}>
           Visualizar
         </button>
       )

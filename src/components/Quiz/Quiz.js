@@ -10,7 +10,7 @@ const Quiz = ({ quizzes }) => {
 
   const questions = [
     {
-      questionText: 'Quanto é 1 + 1?',
+      description: 'Quanto é 1 + 1?',
       answerOptions: [
         { answerText: '2', isCorrect: true },
         { answerText: '3', isCorrect: false },
@@ -41,15 +41,7 @@ const Quiz = ({ quizzes }) => {
     <div className="quiz-container">
       {showScore ? (
         <div className="score-section">
-          Você acertou {score} de {questions.length}
-          <div>
-            Deseja retornar a página de aulas?
-          </div>
-          <button className="quiz-button" onClick={e => {
-            historyContext.push('/aulas')
-          }}>
-            Sim
-          </button>
+          Você acertou {score} de {questions.length} e ganhou {0} moedas
         </div>
       ) : (
         <>
@@ -57,7 +49,7 @@ const Quiz = ({ quizzes }) => {
             <div className="question-count">
               <span>Pergunta {currentQuestion + 1}</span>/{questions.length}
             </div>
-            <div className="question-text">{questions[currentQuestion].questionText}</div>
+            <div className="question-text">{questions[currentQuestion].description}</div>
           </div>
           <div className="answer-section">
             {questions[currentQuestion].answerOptions.map((answerOption) => (

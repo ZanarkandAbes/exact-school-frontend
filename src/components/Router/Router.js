@@ -13,6 +13,7 @@ import QuizEditForm from '../../pages/Quizzes/Edit/QuizEditForm'
 import TopicDetailsForm from '../../pages/Topics/Details/TopicDetailsForm'
 import TopicRegisterForm from '../../pages/Topics/Register/TopicRegisterForm'
 import TopicEditForm from '../../pages/Topics/Edit/TopicEditForm'
+import ClassDetailsForm from '../../pages/Classes/Details/ClassDetailsForm'
 import ClassRegisterForm from '../../pages/Classes/Register/ClassRegisterForm'
 import ClassEditForm from '../../pages/Classes/Edit/ClassEditForm'
 import NotFound from '../../pages/NotFound/NotFound'
@@ -98,6 +99,7 @@ const LoggedRoutes = ({ userType }) => (
       {hasAccess(userType, '/medalhas/visualizar/:id') && <Route component={BadgeDetailsForm} exact path="/medalhas/visualizar/:id" />}
       {hasAccess(userType, '/medalhas/cadastrar') && <Route component={BadgeRegisterForm} exact path="/medalhas/cadastrar" />}
       {hasAccess(userType, '/medalhas/atualizar/:id') && <Route component={BadgeEditForm} exact path="/medalhas/atualizar/:id" />}
+      {hasAccess(userType, '/aulas/visualizar/:id') && <Route component={ClassDetailsForm} exact path="/aulas/visualizar/:id" />}
       {hasAccess(userType, '/aulas/cadastrar') && <Route component={ClassRegisterForm} exact path="/aulas/cadastrar" />}
       {hasAccess(userType, '/aulas/atualizar/:id') && <Route component={ClassEditForm} exact path="/aulas/atualizar/:id" />}
       {hasAccess(userType, '/questionarios/visualizar/:id') && <Route component={QuizDetailsForm} exact path="/questionarios/visualizar/:id" />}

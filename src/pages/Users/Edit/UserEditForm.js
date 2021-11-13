@@ -36,7 +36,6 @@ const UserEditForm = props => {
     const userData = await getUserService(token, paramsContext.id)
     userData.badges = userData.badges.map(badge => ({ value: badge._id, label: badge.name }))
     userData.birthDay = formatDate(new Date(userData.birthDay))
-    console.log('userData', userData)
     formik.setValues(userData)
   }
 

@@ -3,6 +3,7 @@ import React from 'react'
 import { useFormik } from 'formik'
 
 import CustomSelect from '../../../components/CustomSelect/CustomSelect'
+import CustomCreatableSelect from '../../../components/CustomCreatableSelect/CustomCreatableSelect'
 
 import registerQuizService from '../../../services/quizzes/register-quiz'
 
@@ -29,12 +30,16 @@ const QuizRegisterForm = props => {
     }
   ]
 
+  const answersOptions = [{}]
+
   const validate = values => {
     const errors = {}
 
     if (!values.description) errors.description = 'O campo de descrição é obrigatório'
     if (values.description.length < 1 || values.description.length > 500) errors.description = 'É necessário uma descrição entre no mínimo 1 e no máximo 500 caracteres'
-    if (!values.answer) errors.answer = 'O campo de resposta é obrigatório'
+    if (values.answerOptions.length > 3) errors.answerOptions = 'A quantidade de respostas incorretas deve ser no máximo 3'
+    if (!values.answerOptions) errors.answerOptions = 'O campo de resposta(s) é obrigatório'
+    if (!values.correctAnswer) errors.correctAnswer = 'O campo de resposta correta é obrigatório'
     if (!values.coins) errors.coins = 'O campo de moedas é obrigatório'
     if (!values.questionType) errors.questionType = 'O campo de tipo de pergunta é obrigatório'
 
@@ -45,12 +50,32 @@ const QuizRegisterForm = props => {
     initialValues: {
       description: '',
       questionType: '',
-      answer: '',
+      correctAnswer: '',
+      answerOptions: [],
       coins: 0,
     },
     validate,
     onSubmit: values => {
-      
+
+      let answerOptionsToSend = []
+
+      answerOptionsToSend.push({ answerText: values.correctAnswer, isCorrect: true })
+
+      values.answerOptions.forEach(answerOption => answerOptionsToSend.push({ answerText: answerOption.value, isCorrect: false }))
+
+      values.answerOptions = answerOptionsToSend
+
+      values.correctAnswer = undefined
+
+      let newValues = {
+        description: values.description,
+        questionType: values.questionType,
+        answerOptions: values.answerOptions,
+        coins: values.coins
+      }
+
+      values = newValues
+
       registerQuizService(token, values).then(data => {
         if (data) {
           historyContext.push('/questionarios')
@@ -59,7 +84,6 @@ const QuizRegisterForm = props => {
           toastContext.addToast(errorMessagesEnum.REGISTER_QUIZ, { appearance: 'error', autoDismiss: true })
         }
       })
-
     }
   })
 
@@ -79,16 +103,26 @@ const QuizRegisterForm = props => {
           {formik.errors.description ? <div className="quiz-register-form-errors">{formik.errors.description}</div> : null}
         </div>
         <div className="quiz-register-form-fields">
+          <CustomCreatableSelect
+            options={answersOptions}
+            value={formik.values.answerOptions}
+            onChange={value => formik.setFieldValue('answerOptions', value)}
+            placeholder="Digite as respostas incorretas"
+            isMulti={true}
+          />
+          {formik.errors.answerOptions ? <div className="quiz-register-form-errors">{formik.errors.answerOptions}</div> : null}
+        </div>
+        <div className="quiz-register-form-fields">
           <input
-            name="answer"
-            id="answer"
+            name="correctAnswer"
+            id="correctAnswer"
             type="text"
             onChange={formik.handleChange}
             className="quiz-register-form-input"
-            placeholder="Digite a resposta"
-            value={formik.values.answer}
+            placeholder="Digite a resposta correta"
+            value={formik.values.correctAnswer}
           />
-          {formik.errors.answer ? <div className="quiz-register-form-errors">{formik.errors.answer}</div> : null}
+          {formik.errors.correctAnswer ? <div className="quiz-register-form-errors">{formik.errors.correctAnswer}</div> : null}
         </div>
         <div className="quiz-register-form-fields">
           <input

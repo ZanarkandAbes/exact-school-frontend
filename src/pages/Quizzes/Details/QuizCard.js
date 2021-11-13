@@ -5,9 +5,11 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 
 import { IconButton, Typography } from '@material-ui/core'
-import { MoneyOutlined } from '@material-ui/icons'
+import { QuestionAnswerOutlined } from '@material-ui/icons'
 
 const QuizCard = ({ quizData }) => {
+
+  const correctAnswer = quizData.answerOptions.map(answer => answer.isCorrect ? answer.answerText : '')
 
   return (
     <div>
@@ -15,7 +17,7 @@ const QuizCard = ({ quizData }) => {
         <CardHeader
           action={
             <IconButton onClick={e => console.log('aaaa')} >
-              <MoneyOutlined />
+              <QuestionAnswerOutlined />
             </IconButton>
           }
           title={`Dados da Pergunta`}
@@ -29,7 +31,7 @@ const QuizCard = ({ quizData }) => {
             {`Tipo de Pergunta: ${quizData.questionType}`}
           </Typography>
           <Typography>
-            {`Resposta: ${quizData.answer}`}
+            {`Resposta: ${correctAnswer.filter(answer => answer !== "")}`}
           </Typography>
           <Typography>
             {`Moedas de Recompensa: ${quizData.coins.toFixed(2)}`}

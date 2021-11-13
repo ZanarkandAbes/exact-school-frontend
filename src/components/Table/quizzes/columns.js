@@ -43,7 +43,11 @@ export const COLUMNS = (history, token, getQuizzesData, userType) => {
     },
     {
       Header: 'Resposta',
-      accessor: 'answer',
+      accessor: 'answerOptions',
+      Cell: ({ value }) => {
+        const answerValue = value.map(answer => answer.isCorrect ? answer.answerText : '')
+        return answerValue
+      },
       Filter: ColumnFilter
     },
     {
