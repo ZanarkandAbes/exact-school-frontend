@@ -16,7 +16,7 @@ const QuizCard = ({ quizData }) => {
       <Card>
         <CardHeader
           action={
-            <IconButton onClick={e => console.log('aaaa')} >
+            <IconButton>
               <QuestionAnswerOutlined />
             </IconButton>
           }
@@ -34,7 +34,7 @@ const QuizCard = ({ quizData }) => {
             {`Resposta: ${correctAnswer.filter(answer => answer !== "")}`}
           </Typography>
           <Typography>
-            {`Moedas de Recompensa: ${quizData.coins.toFixed(2)}`}
+            {`Moedas de Recompensa: ${quizData.coins.toLocaleString()}`}
           </Typography>
         </CardContent>
       </Card>

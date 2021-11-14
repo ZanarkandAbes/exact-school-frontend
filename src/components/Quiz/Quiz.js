@@ -1,32 +1,20 @@
 import './Quiz.css'
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
+import updateUserService from '../../services/users/update-user'
 
-const Quiz = ({ quizzes }) => {
+const Quiz = ({ quizzes, token, userData }) => {
 
-  // const [questions, setQuestions] = useState([])
-
-  const historyContext = useHistory()
-
-  const questions = [
-    {
-      description: 'Quanto é 1 + 1?',
-      answerOptions: [
-        { answerText: '2', isCorrect: true },
-        { answerText: '3', isCorrect: false },
-        { answerText: '1', isCorrect: false },
-        { answerText: '12', isCorrect: false }
-      ]
-    }
-  ]
+  const questions = quizzes
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [showScore, setShowScore] = useState(false)
   const [score, setScore] = useState(0)
+  const [coins, setCoins] = useState(0)
 
   const handleAnswerOptionClick = (isCorrect) => {
     if (isCorrect) {
       setScore(score + 1)
+      setCoins(coins + quizzes[currentQuestion].coins)
     }
 
     const nextQuestion = currentQuestion + 1
@@ -37,11 +25,23 @@ const Quiz = ({ quizzes }) => {
     }
   }
 
+  const updateUserTotalCoins = async () => {
+    if (!!coins) userData.totalCoins = userData.totalCoins + coins
+
+    let values = userData
+
+    await updateUserService(token, userData._id, values)
+  }
+
+  if (showScore) {
+    updateUserTotalCoins()
+  }
+
   return (
     <div className="quiz-container">
       {showScore ? (
         <div className="score-section">
-          Você acertou {score} de {questions.length} e ganhou {0} moedas
+          Você acertou {score} de {questions.length} e ganhou {coins.toLocaleString()} moedas
         </div>
       ) : (
         <>

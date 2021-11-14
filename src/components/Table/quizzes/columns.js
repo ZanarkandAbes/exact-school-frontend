@@ -53,6 +53,9 @@ export const COLUMNS = (history, token, getQuizzesData, userType) => {
     {
       Header: 'Recompensa Em Moedas',
       accessor: 'coins',
+      Cell: ({ value }) => {
+        return value.toLocaleString()
+      },
       Filter: ColumnFilter
     },
     {

@@ -39,6 +39,9 @@ export const COLUMNS = (history, token, getBadgesData, userType) => {
     {
       Header: 'Preço',
       accessor: 'price',
+      Cell: ({ value }) => {
+        return value.toLocaleString()
+      },
       Filter: ColumnFilter
     },
     {

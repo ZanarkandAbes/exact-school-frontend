@@ -28,6 +28,8 @@ const ClassCard = ({ classData }) => {
 
   if (!userData.badges) return 'Carregando...'
 
+  console.log('classData.quizzes:', classData.quizzes)
+
   return (
     <div>
       <div className="class-video-information-container">
@@ -41,7 +43,7 @@ const ClassCard = ({ classData }) => {
           </CardContent>
         </Card>
       </div>
-      <Quiz quizzes={classData.quizzes} />
+      {classData.quizzes.length !== 0 ? <Quiz quizzes={classData.quizzes} token={token} userData={userData} /> : null}
     </div>
   )
 }

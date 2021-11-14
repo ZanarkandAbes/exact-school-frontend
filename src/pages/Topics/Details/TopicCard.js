@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import getUserService from '../../../services/users/get-user'
 
 import { IconButton, Typography } from '@material-ui/core'
-import { MoneyOutlined } from '@material-ui/icons'
+import { TextFieldsOutlined } from '@material-ui/icons'
 
 import { useAuth } from '../../../providers/auth'
 
@@ -33,8 +33,8 @@ const TopicCard = ({ topicData }) => {
       <Card>
         <CardHeader
           action={
-            <IconButton onClick={e => console.log('aaaa')} >
-              <MoneyOutlined />
+            <IconButton>
+              <TextFieldsOutlined />
             </IconButton>
           }
           title={`Dados do Tópico ${topicData.title}`}

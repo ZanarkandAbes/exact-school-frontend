@@ -5,7 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 
 import { IconButton, Typography } from '@material-ui/core'
-import { MoneyOutlined } from '@material-ui/icons'
+import { VerifiedUserOutlined } from '@material-ui/icons'
 
 import { format } from 'date-fns'
 
@@ -29,8 +29,8 @@ const UserCard = ({ userData }) => {
       <Card>
         <CardHeader
           action={
-            <IconButton onClick={e => console.log('aaaa')} >
-              <MoneyOutlined />
+            <IconButton>
+              <VerifiedUserOutlined />
             </IconButton>
           }
           title={`Dados do Usuário ${userData.name}`}
@@ -50,7 +50,7 @@ const UserCard = ({ userData }) => {
             {`Medalhas: ${badges}`}
           </Typography>
           <Typography>
-            {`Moedas: ${userData.totalCoins.toFixed(2)}`}
+            {`Moedas: ${userData.totalCoins.toLocaleString()}`}
           </Typography>
         </CardContent>
       </Card>

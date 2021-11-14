@@ -43,7 +43,7 @@ const BadgeCard = ({ badgeData }) => {
       <div className="user-coins-card-container">
         <Card>
           <CardHeader
-            title={`Você tem ${userData.totalCoins.toFixed(2)} moedas`}
+            title={`Você tem ${userData.totalCoins.toLocaleString()} moedas`}
           />
         </Card>
       </div>
@@ -72,7 +72,7 @@ const BadgeCard = ({ badgeData }) => {
           />
           <CardContent>
             <Typography>
-              {`Preço: ${badgeData.price.toFixed(2)}`}
+              {`Preço: ${badgeData.price.toLocaleString()}`}
             </Typography>
             <Typography>
               {`Tipo de Medalha: ${badgeData.badgeType}`}

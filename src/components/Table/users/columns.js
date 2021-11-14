@@ -57,6 +57,9 @@ export const COLUMNS = (history, token, getUsersData, userType) => {
     {
       Header: 'Total de Moedas',
       accessor: 'totalCoins',
+      Cell: ({ value }) => {
+        return value.toLocaleString()
+      },
       Filter: ColumnFilter
     },
     {
