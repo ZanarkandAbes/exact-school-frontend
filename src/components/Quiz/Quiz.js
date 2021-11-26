@@ -27,7 +27,7 @@ const Quiz = ({ quizzes, token, userData }) => {
 
   const updateUserTotalCoins = async () => {
     if (!!coins) userData.totalCoins = userData.totalCoins + coins
-
+    
     let values = userData
 
     await updateUserService(token, userData._id, values)

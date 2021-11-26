@@ -15,10 +15,12 @@ const ClassCard = ({ classData }) => {
 
   const { token } = useAuth()
 
+  const userDataToGet = useAuth().userData
+
   const [userData, setUserData] = useState({})
 
   const getUserData = async () => {
-    const userData = await getUserService(token, classData.userId)
+    const userData = await getUserService(token, userDataToGet._id)
     setUserData(userData)
   }
 
@@ -27,8 +29,6 @@ const ClassCard = ({ classData }) => {
   }, [])
 
   if (!userData.badges) return 'Carregando...'
-
-  console.log('classData.quizzes:', classData.quizzes)
 
   return (
     <div>

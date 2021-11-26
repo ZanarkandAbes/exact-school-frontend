@@ -35,6 +35,8 @@ export const AuthProvider = ({ children }) => {
     // }, [alreadyRanOnce, token, userData])
 
     const logout = () => {
+        localStorage.removeItem('app-token')
+        localStorage.removeItem('app-user-data')
         setToken('')
         setUserData({})
     }
